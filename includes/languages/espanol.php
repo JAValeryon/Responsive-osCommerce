@@ -52,7 +52,7 @@ define('TITLE', STORE_NAME);
 define('HEADER_TITLE_MY_ACCOUNT', 'Mi Cuenta');
 
 // text in includes/application_top.php
-define('HEADER_TITLE_TOP', '<i class="fa fa-home"><span class="sr-only">Inicio</span></i>');
+define('HEADER_TITLE_TOP', '<i class="fas fa-home"></i><span class="sr-only"> Inicio</span>');
 define('HEADER_TITLE_CATALOG', 'Catálogo');
 
 // text for gender

@@ -21,5 +21,5 @@ define('OUT_OF_STOCK_CAN_CHECKOUT', 'Los Productos marcados con ' . STOCK_MARK_P
 
 define('TEXT_ALTERNATIVE_CHECKOUT_METHODS', '- O -');
 
-//define('CART_BUTTON_UPDATE', '');
-//define('CART_BUTTON_REMOVE', '');
+define('CART_BUTTON_UPDATE', '');
+define('CART_BUTTON_REMOVE', '');

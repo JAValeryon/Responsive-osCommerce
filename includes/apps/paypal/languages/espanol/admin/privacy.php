@@ -1,6 +1,6 @@
 privacy_title = Privacy Policy
 
-privacy_body = <h3>API Credentials <small>(available for :api_req_countries countries only)</small></h3>
+privacy_body = <h3>API Credentials</h3>
 
 <p> La aplicación de PayPal para osCommerce Online Merchant permite a los propietarios de tiendas configurar y configurar automáticamente la aplicación con sus credenciales API de PayPal sin la necesidad de ingresarlas manualmente. Esto se realiza de forma segura al otorgar acceso a osCommerce para recuperar las credenciales API de la cuenta PayPal de los propietarios de la tienda. </p>
 

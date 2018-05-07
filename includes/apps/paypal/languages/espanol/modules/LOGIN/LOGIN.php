@@ -16,6 +16,8 @@ module_login_introduction = <ul>
 module_login_error_curl = Este módulo requiere que cURL esté habilitado en PHP y no se cargará hasta que se haya habilitado en este servidor web.
 module_login_error_credentials = Este módulo no se cargará hasta que se hayan configurado la ID del cliente y la clave secreta. Edite y configure la configuración de la aplicación de PayPal.
 
+module_login_notice_paypal_app_return_url = La siguiente url se debe configurar como su URL de retorno en la configuración de la aplicación REST de PayPal que se creó para iniciar sesión con PayPal:<br /><br />:return_url
+
 module_login_template_title = Iniciar sesión con Paypal
 module_login_template_content = ¿Tienes una cuenta de PayPal? ¡Inicie sesión de manera segura con PayPal para comprar aún más rápido!
 module_login_template_sandbox_alert = Modo Test: El servidor de Pruebas actualmente está seleccionado.

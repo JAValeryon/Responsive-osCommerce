@@ -5,7 +5,7 @@
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright (c) 2014 osCommerce
+  Copyright (c) 2017 osCommerce
 
   Released under the GNU General Public License
 */
@@ -225,7 +225,7 @@
                                   'currency' => $order->info['currency'],
                                   'currency_value' => $order->info['currency_value']);
 
-          tep_db_perform('orders', $sql_data_array);
+         tep_db_perform('orders', $sql_data_array);
 
           $insert_id = tep_db_insert_id();
 
@@ -318,6 +318,7 @@
                         'billing_first_name' => $order->billing['firstname'],
                         'billing_last_name' => $order->billing['lastname'],
                         'billing_address1' => $order->billing['street_address'],
+                        'billing_address2' => $order->billing['suburb'],
                         'billing_city' => $order->billing['city'],
                         'billing_state' => tep_get_zone_code($order->billing['country']['id'], $order->billing['zone_id'], $order->billing['state']),
                         'billing_zip' => $order->billing['postcode'],
@@ -334,6 +335,7 @@
           $params['first_name'] = $order->delivery['firstname'];
           $params['last_name'] = $order->delivery['lastname'];
           $params['address1'] = $order->delivery['street_address'];
+          $params['address2'] = $order->delivery['suburb'];
           $params['city'] = $order->delivery['city'];
           $params['state'] = tep_get_zone_code($order->delivery['country']['id'], $order->delivery['zone_id'], $order->delivery['state']);
           $params['zip'] = $order->delivery['postcode'];
@@ -389,14 +391,14 @@ EOD;
     }
 
     function before_process() {
-      global $cart_PayPal_Pro_HS_ID, $customer_id, $pphs_result, $order, $order_totals, $sendto, $billto, $languages_id, $payment, $currencies, $cart, $$payment;
+      global $HTTP_GET_VARS, $HTTP_POST_VARS, $cart_PayPal_Pro_HS_ID, $customer_id, $pphs_result, $order, $order_totals, $sendto, $billto, $languages_id, $payment, $currencies, $cart, $$payment;
 
       $result = false;
 
-      if ( isset($_GET['tx']) && !empty($_GET['tx']) ) { // direct payment (eg, credit card)
-        $result = $this->_app->getApiResult('APP', 'GetTransactionDetails', array('TRANSACTIONID' => $_GET['tx']), (OSCOM_APP_PAYPAL_HS_STATUS == '1') ? 'live' : 'sandbox');
-      } elseif ( isset($_POST['txn_id']) && !empty($_POST['txn_id']) ) { // paypal payment
-        $result = $this->_app->getApiResult('APP', 'GetTransactionDetails', array('TRANSACTIONID' => $_POST['txn_id']), (OSCOM_APP_PAYPAL_HS_STATUS == '1') ? 'live' : 'sandbox');
+      if ( isset($HTTP_GET_VARS['tx']) && !empty($HTTP_GET_VARS['tx']) ) { // direct payment (eg, credit card)
+        $result = $this->_app->getApiResult('APP', 'GetTransactionDetails', array('TRANSACTIONID' => $HTTP_GET_VARS['tx']), (OSCOM_APP_PAYPAL_HS_STATUS == '1') ? 'live' : 'sandbox');
+      } elseif ( isset($HTTP_POST_VARS['txn_id']) && !empty($HTTP_POST_VARS['txn_id']) ) { // paypal payment
+        $result = $this->_app->getApiResult('APP', 'GetTransactionDetails', array('TRANSACTIONID' => $HTTP_POST_VARS['txn_id']), (OSCOM_APP_PAYPAL_HS_STATUS == '1') ? 'live' : 'sandbox');
       }
 
       if ( !in_array($result['ACK'], array('Success', 'SuccessWithWarning')) ) {

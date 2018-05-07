@@ -14,8 +14,11 @@ module_ps_introduction = <ul>
 <p>PayPal maneja la experiencia de aceptación de pago y devuelve al cliente a su tienda después de realizar el pago</p>
 <p>Para los nuevos compradores, registrarse para obtener una cuenta de PayPal es opcional, lo que significa que los clientes pueden completar sus pagos primero y luego decidir guardar su información en una cuenta de PayPal para futuras compras.</p>
 
+module_ps_info_auto_return_url = Si la devolución automática para pagos en sitio web está habilitada en la configuración del perfil de su cuenta de Paypal, la siguiente URL se debe usar como la URL de retorno:<br /><br />:auto_return_url
+
 module_ps_error_curl = Este módulo requiere que cURL esté habilitado en PHP y no se cargará hasta que se haya habilitado en este servidor web.
 module_ps_error_credentials = Este módulo no se cargará hasta que se haya configurado el parámetro Dirección de correo electrónico del vendedor. Edite y configure los ajustes de este módulo.
+module_ps_error_credentials_pdt_api = Este módulo no se cargará hasta que se haya configurado el token de identidad PDT o las credenciales API. El token de identidad PDT se puede ingresar en la página de configuración estándar de pagos o las credenciales API se pueden ingresar en la página de configuración de credenciales de la aplicación PayPal..
 
 module_ps_button_return_to_store = Volver a :storename
 

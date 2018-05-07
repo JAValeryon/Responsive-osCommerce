@@ -36,3 +36,4 @@ module_ec_error_address = Error: La Ciudad, la provincia y el código postal de 
 module_ec_error_declined = Error: La transacción ha sido rechazada. Por favor, inténtalo de nuevo.
 module_ec_error_local_login_required = Inicie sesión en su cuenta para verificar el pedido.
 module_ec_error_no_shipping_available = El envío actualmente no está disponible para la dirección de envío seleccionada. Seleccione o cree una nueva dirección de envío para usar con su compra.
+module_ec_error_setexpresscheckout_call = Hubo un problema al iniciar el pago en PayPal. Intente de nuevo o seleccione otro método de pago si el problema persiste.

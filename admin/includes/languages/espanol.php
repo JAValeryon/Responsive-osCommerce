@@ -16,7 +16,7 @@
 //México 'es_MX.UTF-8', 'es_MX.UTF8', 'esm_es'
 //
 
-@setlocale(LC_ALL, array('es_ES.UTF-8', 'es_ES.UTF8', 'esp_es'));
+setlocale(LC_ALL, array('es_ES.UTF-8', 'es_ES.UTF8', 'esp_es'));
 define('DATE_FORMAT_SHORT', '%d/%m/%Y');  // this is used for strftime()
 define('DATE_FORMAT_LONG', '%A %d de %B de %Y'); // this is used for strftime()
 define('DATE_FORMAT', 'd/m/Y');  // this is used for date()
@@ -203,7 +203,7 @@ define('IMAGE_DETAILS', 'Detalle');
 define('IMAGE_DELETE', 'Eliminar');
 define('IMAGE_EDIT', 'Editar');
 define('IMAGE_EMAIL', 'Email');
-define('IMAGE_FILE_MANAGER', 'Ficheros');
+define('IMAGE_EXPORT', 'Exportar');
 define('IMAGE_ICON_STATUS_GREEN', 'Activado');
 define('IMAGE_ICON_STATUS_GREEN_LIGHT', 'Activar');
 define('IMAGE_ICON_STATUS_RED', 'Desactivado');

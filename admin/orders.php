@@ -2,10 +2,18 @@
 /*
   $Id$
 
+  Modified for:
+  Purchase without Account for Bootstrap
+  Version 3.0 BS 
+  by @raiwa 
+  info@oscaddons.com
+  www.oscaddons.com
+  all credits to @deDocta
+
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright (c) 2014 osCommerce
+  Copyright (c) 2018 osCommerce
 
   Released under the GNU General Public License
 */
@@ -34,7 +42,9 @@
         $comments = tep_db_prepare_input($_POST['comments']);
 
         $order_updated = false;
-        $check_status_query = tep_db_query("select customers_name, customers_email_address, orders_status, date_purchased from " . TABLE_ORDERS . " where orders_id = '" . (int)$oID . "'");
+// PWA guest checkout
+        $check_status_query = tep_db_query("select customers_name, customers_guest, reviews_key, customers_email_address, orders_status, date_purchased from orders where orders_id = '" . (int)$oID . "'");
+
         $check_status = tep_db_fetch_array($check_status_query);
 
         if ( ($check_status['orders_status'] != $status) || tep_not_null($comments)) {
@@ -47,14 +57,33 @@
               $notify_comments = sprintf(EMAIL_TEXT_COMMENTS_UPDATE, $comments) . "\n\n";
             }
 
-            $email = STORE_NAME . "\n" . EMAIL_SEPARATOR . "\n" . EMAIL_TEXT_ORDER_NUMBER . ' ' . $oID . "\n" . EMAIL_TEXT_INVOICE_URL . ' ' . tep_catalog_href_link('account_history_info.php', 'order_id=' . $oID, 'SSL') . "\n" . EMAIL_TEXT_DATE_ORDERED . ' ' . tep_date_long($check_status['date_purchased']) . "\n\n" . $notify_comments . sprintf(EMAIL_TEXT_STATUS_UPDATE, $orders_status_array[$status]);
+// PWA guest checkout BEGIN
+            if ( isset($_POST['add_reviews']) && ($_POST['notify'] == 'on') ) {
+              include('includes/classes/order.php');
+              $order = new order($oID);
+              $products_review_links = constant('MODULE_CONTENT_PWA_REVIEWS_' . strtoupper($language)) . ':' . "\n";
+              for ($i=0, $n=sizeof($order->products); $i<$n; $i++) {
+                if ($check_status['customers_guest'] == '1') {
+                  $products_review_links .= '<a href="' . tep_catalog_href_link('product_reviews_write_pwa.php', 'products_id=' . tep_get_prid($order->products[$i]['id']) . '&pwa_id=' . $check_status['reviews_key'], 'SSL', false) . '">' . $order->products[$i]['name'] . '</a>' . "\n";
+                } elseif ($check_status['customers_guest'] != '1') {
+                  $products_review_links .= '<a href="' . tep_catalog_href_link('product_reviews_write.php', 'products_id=' . tep_get_prid($order->products[$i]['id']), 'SSL', false) . '">' . $order->products[$i]['name'] . '</a>' . "\n";
+                }
+              }      
+            }            
+            $link = $check_status['customers_guest'] != '1' ? EMAIL_TEXT_INVOICE_URL . ' ' . tep_catalog_href_link('account_history_info.php', 'order_id=' . $oID, 'SSL') . "\n" : '';
+            $email = STORE_NAME . "\n" . EMAIL_SEPARATOR . "\n" . EMAIL_TEXT_ORDER_NUMBER . ' ' . $oID . "\n" . $link . EMAIL_TEXT_DATE_ORDERED . ' ' . tep_date_long($check_status['date_purchased']) . "\n\n" . $products_review_links . "\n" . $notify_comments . sprintf(EMAIL_TEXT_STATUS_UPDATE, $orders_status_array[$status]);
+// PWA guest checkout END
+
 
             tep_mail($check_status['customers_name'], $check_status['customers_email_address'], EMAIL_TEXT_SUBJECT, $email, STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);
 
             $customer_notified = '1';
           }
 
-          tep_db_query("insert into " . TABLE_ORDERS_STATUS_HISTORY . " (orders_id, orders_status_id, date_added, customer_notified, comments) values ('" . (int)$oID . "', '" . tep_db_input($status) . "', now(), '" . tep_db_input($customer_notified) . "', '" . tep_db_input($comments)  . "')");
+// PWA guest checkout
+          $comments = ((isset($_POST['add_reviews'])? constant('MODULE_CONTENT_PWA_REVIEWS_' . strtoupper($language)) . "\n\n" : '')) . tep_db_prepare_input($_POST['comments']);
+          tep_db_query("insert into orders_status_history (orders_id, orders_status_id, date_added, customer_notified, comments) values ('" . (int)$oID . "', '" . tep_db_input($status) . "', now(), '" . tep_db_input($customer_notified) . "', '" . tep_db_input($comments)  . "')");
+
 
           $order_updated = true;
         }
@@ -357,6 +386,13 @@ if ( typeof jQuery.ui == 'undefined' ) {
         <td><?php echo ENTRY_NOTIFY_COMMENTS; ?></td>
         <td><?php echo tep_draw_checkbox_field('notify_comments', '', true); ?></td>
       </tr>
+<!--PWA guest checkout BEGIN-->
+      <tr>
+        <td><?php echo constant('MODULE_CONTENT_PWA_REVIEWS_STATUS_' . strtoupper($language)); ?></td>
+        <td><?php echo tep_draw_checkbox_field('add_reviews'); ?></td>
+      </tr>
+<!--PWA guest checkout END-->
+
       <tr>
         <td colspan="2" align="right"><?php echo tep_draw_button(IMAGE_UPDATE, 'disk', null, 'primary'); ?></td>
       </tr>
@@ -441,21 +477,25 @@ $(function() {
             <td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr class="dataTableHeadingRow">
                 <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_CUSTOMERS; ?></td>
+<!--PWA guest checkout-->
+                <td class="dataTableHeadingContent" align="right"><?php echo constant('MODULE_CONTENT_PWA_GUEST_' . strtoupper($language)); ?></td>
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ORDER_TOTAL; ?></td>
                 <td class="dataTableHeadingContent" align="center"><?php echo TABLE_HEADING_DATE_PURCHASED; ?></td>
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_STATUS; ?></td>
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ACTION; ?>&nbsp;</td>
               </tr>
 <?php
+// PWA guest checkout BEGIN
     if (isset($_GET['cID'])) {
       $cID = tep_db_prepare_input($_GET['cID']);
-      $orders_query_raw = "select o.orders_id, o.customers_name, o.customers_id, o.payment_method, o.date_purchased, o.last_modified, o.currency, o.currency_value, s.orders_status_name, ot.text as order_total from " . TABLE_ORDERS . " o left join " . TABLE_ORDERS_TOTAL . " ot on (o.orders_id = ot.orders_id), " . TABLE_ORDERS_STATUS . " s where o.customers_id = '" . (int)$cID . "' and o.orders_status = s.orders_status_id and s.language_id = '" . (int)$languages_id . "' and ot.class = 'ot_total' order by orders_id DESC";
+      $orders_query_raw = "select o.orders_id, o.customers_name, o.customers_id, o.customers_guest, o.payment_method, o.date_purchased, o.last_modified, o.currency, o.currency_value, s.orders_status_name, ot.text as order_total from orders o left join orders_total ot on (o.orders_id = ot.orders_id), orders_status s where o.customers_id = '" . (int)$cID . "' and o.orders_status = s.orders_status_id and s.language_id = '" . (int)$languages_id . "' and ot.class = 'ot_total' order by orders_id DESC";
     } elseif (isset($_GET['status']) && is_numeric($_GET['status']) && ($_GET['status'] > 0)) {
       $status = tep_db_prepare_input($_GET['status']);
-      $orders_query_raw = "select o.orders_id, o.customers_name, o.payment_method, o.date_purchased, o.last_modified, o.currency, o.currency_value, s.orders_status_name, ot.text as order_total from " . TABLE_ORDERS . " o left join " . TABLE_ORDERS_TOTAL . " ot on (o.orders_id = ot.orders_id), " . TABLE_ORDERS_STATUS . " s where o.orders_status = s.orders_status_id and s.language_id = '" . (int)$languages_id . "' and s.orders_status_id = '" . (int)$status . "' and ot.class = 'ot_total' order by o.orders_id DESC";
+      $orders_query_raw = "select o.orders_id, o.customers_name, o.customers_guest, o.payment_method, o.date_purchased, o.last_modified, o.currency, o.currency_value, s.orders_status_name, ot.text as order_total from orders o left join orders_total ot on (o.orders_id = ot.orders_id), orders_status s where o.orders_status = s.orders_status_id and s.language_id = '" . (int)$languages_id . "' and s.orders_status_id = '" . (int)$status . "' and ot.class = 'ot_total' order by o.orders_id DESC";
     } else {
-      $orders_query_raw = "select o.orders_id, o.customers_name, o.payment_method, o.date_purchased, o.last_modified, o.currency, o.currency_value, s.orders_status_name, ot.text as order_total from " . TABLE_ORDERS . " o left join " . TABLE_ORDERS_TOTAL . " ot on (o.orders_id = ot.orders_id), " . TABLE_ORDERS_STATUS . " s where o.orders_status = s.orders_status_id and s.language_id = '" . (int)$languages_id . "' and ot.class = 'ot_total' order by o.orders_id DESC";
+      $orders_query_raw = "select o.orders_id, o.customers_name, o.customers_guest, o.payment_method, o.date_purchased, o.last_modified, o.currency, o.currency_value, s.orders_status_name, ot.text as order_total from orders o left join orders_total ot on (o.orders_id = ot.orders_id), orders_status s where o.orders_status = s.orders_status_id and s.language_id = '" . (int)$languages_id . "' and ot.class = 'ot_total' order by o.orders_id DESC";
     }
+// PWA guest checkout END
     $orders_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $orders_query_raw, $orders_query_numrows);
     $orders_query = tep_db_query($orders_query_raw);
     while ($orders = tep_db_fetch_array($orders_query)) {
@@ -470,6 +510,8 @@ $(function() {
       }
 ?>
                 <td class="dataTableContent"><?php echo '<a href="' . tep_href_link('orders.php', tep_get_all_get_params(array('oID', 'action')) . 'oID=' . $orders['orders_id'] . '&action=edit') . '">' . tep_image('images/icons/preview.gif', ICON_PREVIEW) . '</a>&nbsp;' . $orders['customers_name']; ?></td>
+<!--PWA guest checkout-->
+                <td class="dataTableContent" align="right"><?php echo $orders['customers_guest'] == '1' ? tep_image('images/icons/tick.gif') : ''; ?></td>
                 <td class="dataTableContent" align="right"><?php echo strip_tags($orders['order_total']); ?></td>
                 <td class="dataTableContent" align="center"><?php echo tep_datetime_short($orders['date_purchased']); ?></td>
                 <td class="dataTableContent" align="right"><?php echo $orders['orders_status_name']; ?></td>

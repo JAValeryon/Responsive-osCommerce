@@ -2,10 +2,18 @@
 /*
   $Id$
 
+  Modified for:
+  Purchase without Account for Bootstrap
+  Version 3.0 BS 
+  by @raiwa 
+  info@oscaddons.com
+  www.oscaddons.com
+  all credits to @deDocta
+
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright (c) 2012 osCommerce
+  Copyright (c) 2018 osCommerce
 
   Released under the GNU General Public License
 */
@@ -245,6 +253,10 @@
                  EMAIL_TEXT_ORDER_NUMBER . ' ' . $insert_id . "\n" .
                  EMAIL_TEXT_INVOICE_URL . ' ' . tep_href_link('account_history_info.php', 'order_id=' . $insert_id, 'SSL', false) . "\n" .
                  EMAIL_TEXT_DATE_ORDERED . ' ' . strftime(DATE_FORMAT_LONG) . "\n\n";
+
+// PWA guest checkout
+  echo $OSCOM_Hooks->call('checkout_process', 'PwaCheckoutMailMod');
+
   if ($order->info['comments']) {
     $email_order .= tep_db_output($order->info['comments']) . "\n\n";
   }
@@ -275,6 +287,7 @@
       $email_order .= $payment_class->email_footer . "\n\n";
     }
   }
+  
   tep_mail($order->customer['firstname'] . ' ' . $order->customer['lastname'], $order->customer['email_address'], EMAIL_TEXT_SUBJECT, $email_order, STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);
 
 // send emails to other people

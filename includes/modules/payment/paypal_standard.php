@@ -2,10 +2,17 @@
 /*
   $Id$
 
+  Modified for:
+  Purchase without Account for Bootstrap
+  Version 3.0 BS 
+  by @raiwa 
+  info@oscaddons.com
+  www.oscaddons.com
+
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
-  Copyright (c) 2017 osCommerce
+  Copyright (c) 2018 osCommerce
 
   Released under the GNU General Public License
 */
@@ -244,6 +251,10 @@
                                   'orders_status' => $order->info['order_status'],
                                   'currency' => $order->info['currency'],
                                   'currency_value' => $order->info['currency_value']);
+         // PWA guest checkout BEGIN
+         if (tep_session_is_registered('customer_is_guest') )
+           $sql_data_array = array_merge(array('customers_guest' => 1), $sql_data_array);
+         // PWA guest checkout END
 
           tep_db_perform('orders', $sql_data_array);
 
@@ -669,7 +680,7 @@
 
     function before_process() {
       global $order_id, $order, $languages_id, $currencies, $order_totals, $customer_id, $sendto, $billto, $payment;
-
+      global $language; // PWA guest checkout
       $new_order_status = DEFAULT_ORDERS_STATUS_ID;
 
       if ( OSCOM_APP_PAYPAL_PS_ORDER_STATUS_ID > 0) {
@@ -761,9 +772,39 @@
 
 // lets start with the email confirmation
       $email_order = STORE_NAME . "\n" .
-                     EMAIL_SEPARATOR . "\n" .
-                     EMAIL_TEXT_ORDER_NUMBER . ' ' . $order_id . "\n" .
-                     EMAIL_TEXT_INVOICE_URL . ' ' . tep_href_link('account_history_info.php', 'order_id=' . $order_id, 'SSL', false) . "\n" .
+// PWA guest checkout BEGIN
+                     EMAIL_TEXT_ORDER_NUMBER . ' ' . $order_id . "\n" . 
+                     EMAIL_SEPARATOR . "\n";
+                
+      if(!tep_session_is_registered('customer_is_guest')) {         
+        $email_order .= EMAIL_TEXT_INVOICE_URL . ' ' . tep_href_link('account_history_info.php', 'order_id=' . $order_id, 'SSL', false) . "\n";
+      }
+  
+      $products_review_links = constant('MODULE_CONTENT_PWA_REVIEWS_' . strtoupper($language)) . "\n";
+      if(tep_session_is_registered('customer_is_guest')) {         
+        $email_order .= constant('MODULE_CONTENT_PWA_EMAIL_WARNING_' . strtoupper($language)) . "\n\n" . 
+                        EMAIL_SEPARATOR . "\n"; 
+        if($order->content_type != 'physical') {         
+          $email_order .= constant('MODULE_CONTENT_PWA_DOWNLOAD_' . strtoupper($language)) . "\n" . 
+                          EMAIL_SEPARATOR . "\n";
+        }
+        $reviews_key = tep_create_random_value(12);
+        tep_db_query("update orders set reviews_key = '" . $reviews_key . "' where customers_id = '" . (int)$customer_id . "' and orders_id = '" . (int)$order_id . "'");
+        if(MODULE_CONTENT_PWA_LOGIN_CHECKOUT_GUEST_REVIEW_LINKS == 'True') {
+          for ($i=0, $n=sizeof($order->products); $i<$n; $i++) {
+            $products_review_links .= '<a href="' . tep_href_link('product_reviews_write_pwa.php', 'products_id=' . (strpos($order->products[$i]['id'], '{')? strstr($order->products[$i]['id'], '{', true) : $order->products[$i]['id']) . '&pwa_id=' . $reviews_key, 'SSL', false) . '">' . $order->products[$i]['name'] . '</a>' . "\n";
+          }      
+          $email_order .= $products_review_links . "\n" . 
+                          EMAIL_SEPARATOR . "\n";
+        }
+      } elseif (MODULE_CONTENT_PWA_LOGIN_CHECKOUT_REGISTERED_REVIEW_LINKS == 'True') {
+        for ($i=0, $n=sizeof($order->products); $i<$n; $i++) {
+          $products_review_links .= '<a href="' . tep_href_link('product_reviews_write.php', 'products_id=' . (strpos($order->products[$i]['id'], '{')? strstr($order->products[$i]['id'], '{', true) : $order->products[$i]['id']), 'SSL', false) . '">' . $order->products[$i]['name'] . '</a>' . "\n";
+        }      
+        $email_order .= $products_review_links . "\n" . 
+                        EMAIL_SEPARATOR . "\n";
+     }
+// PWA guest checkout END
                      EMAIL_TEXT_DATE_ORDERED . ' ' . strftime(DATE_FORMAT_LONG) . "\n\n";
       if ($order->info['comments']) {
         $email_order .= tep_db_output($order->info['comments']) . "\n\n";

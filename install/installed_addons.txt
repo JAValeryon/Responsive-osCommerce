@@ -6,14 +6,15 @@ Category Images V 1.1 [35cae2b]
 https://apps.oscommerce.com/XsmVa&categoy-images&p=6
 ******************************************************************
 Purchase without Account for Bootstrap
-  Version 3.0 BS [a4869e9] 
+  Version 3.0.2 BS [a4869e9] 
 https://apps.oscommerce.com/5f3nn&purchase-without-account-bs
 ******************************************************************
-Modular Checkout pages BS Version 1.0 [dd17852]
+Modular Checkout pages BS Version 1.0.2 [dd17852]
 https://apps.oscommerce.com/89uS9&modular-checkout-pages-bs
 ******************************************************************
-
-
+Modular Shopping Cart BS Version 2.0 []
+https://apps.oscommerce.com/5q6qA&modular-shopping-cart-bs
+******************************************************************
 
 
 
@@ -32,15 +33,21 @@ Attention: The following Core Files have been modified and should not be replace
 /checkout_payment_address.php
 /checkout_confirmation.php
 /checkout_process.php
+/shopping_cart.php
+
 /includes/modules/downloads.php 
 /includes/modules/payment/paypal_standard.php
+
 /includes/languages/english/checkout_shipping.php
 /includes/languages/english/checkout_shipping_address.php
 /includes/languages/english/checkout_payment.php
 /includes/languages/english/checkout_payment_address.php
 /includes/languages/english/checkout_confirmation.php
+/includes/languages/english/shopping_cart.php
+
 /includes/languages/espanol/checkout_shipping.php
 /includes/languages/espanol/checkout_shipping_address.php
 /includes/languages/espanol/checkout_payment.php
 /includes/languages/espanol/checkout_payment_address.php
 /includes/languages/espanol/checkout_confirmation.php
+/includes/languages/espanol/shopping_cart.php

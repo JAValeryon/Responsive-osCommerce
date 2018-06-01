@@ -9,6 +9,38 @@ Purchase without Account for Bootstrap
   Version 3.0 BS [a4869e9] 
 https://apps.oscommerce.com/5f3nn&purchase-without-account-bs
 ******************************************************************
-Modular Checkout pages BS Version 1.0
+Modular Checkout pages BS Version 1.0 [dd17852]
 https://apps.oscommerce.com/89uS9&modular-checkout-pages-bs
 ******************************************************************
+
+
+
+
+
+
+Attention: The following Core Files have been modified and should not be replaced!
+
+
+/admin/customers.php 
+/admin/orders.php
+/admin/reviews.php 
+/admin/includes/classes/order.php
+
+/checkout_shipping.php
+/checkout_shipping_address.php
+/checkout_payment.php
+/checkout_payment_address.php
+/checkout_confirmation.php
+/checkout_process.php
+/includes/modules/downloads.php 
+/includes/modules/payment/paypal_standard.php
+/includes/languages/english/checkout_shipping.php
+/includes/languages/english/checkout_shipping_address.php
+/includes/languages/english/checkout_payment.php
+/includes/languages/english/checkout_payment_address.php
+/includes/languages/english/checkout_confirmation.php
+/includes/languages/espanol/checkout_shipping.php
+/includes/languages/espanol/checkout_shipping_address.php
+/includes/languages/espanol/checkout_payment.php
+/includes/languages/espanol/checkout_payment_address.php
+/includes/languages/espanol/checkout_confirmation.php

@@ -7,5 +7,8 @@ https://apps.oscommerce.com/XsmVa&categoy-images&p=6
 ******************************************************************
 Purchase without Account for Bootstrap
   Version 3.0 BS [a4869e9] 
-https://apps.oscommerce.com/5f3nn&purchase-without-account-bsgit re
+https://apps.oscommerce.com/5f3nn&purchase-without-account-bs
+******************************************************************
+Modular Checkout pages BS Version 1.0
+https://apps.oscommerce.com/89uS9&modular-checkout-pages-bs
 ******************************************************************

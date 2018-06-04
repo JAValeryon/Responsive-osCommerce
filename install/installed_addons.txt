@@ -9,14 +9,12 @@ Purchase without Account for Bootstrap
   Version 3.0.2 BS [a4869e9] 
 https://apps.oscommerce.com/5f3nn&purchase-without-account-bs
 ******************************************************************
-Modular Checkout pages BS Version 1.0.2 [dd17852]
+Modular Checkout pages BS Version 1.0.3 [dd17852]
 https://apps.oscommerce.com/89uS9&modular-checkout-pages-bs
 ******************************************************************
-Modular Shopping Cart BS Version 2.0 []
+Modular Shopping Cart BS Version 2.0 [cd8e3f1]
 https://apps.oscommerce.com/5q6qA&modular-shopping-cart-bs
 ******************************************************************
-
-
 
 
 Attention: The following Core Files have been modified and should not be replaced!

@@ -2,7 +2,7 @@
 /*
   $Id$
 
-  Modular Checkout by @raiwa
+  Modular Checkout 1.0.3. by @raiwa
   info@oscaddons.com
   www.oscaddons.com
   
@@ -37,7 +37,7 @@
     }
 
     function execute() {
-      global $oscTemplate, $process, $customer_id, $sendto, $sessiontoken, $redirect_to_shipping;
+      global $oscTemplate, $process, $customer_id, $sendto, $sessiontoken, $redirect_to_shipping, $customer_default_address_id;
       
       $content_width = (int)MODULE_CONTENT_CHECKOUT_SHIPPING_ADDRESS_SHIPPING_ADDRESS_CONTENT_WIDTH;
 

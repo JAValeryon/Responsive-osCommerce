@@ -13,8 +13,13 @@
 // start the timer for the page parse time log
   define('PAGE_PARSE_START_TIME', microtime());
 
+// Develop
 // set the level of error reporting
   error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT);
+
+// Production  
+//error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT & ~E_USER_DEPRECATED);
+//ini_set('display_errors','0'); 
 
 // check support for register_globals
   if (function_exists('ini_get') && (ini_get('register_globals') == false) && (PHP_VERSION < 4.3) ) {

@@ -31,7 +31,7 @@
 
 <link href="ext/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <!-- font awesome -->
-<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js"></script>
 
 <link href="custom.css" rel="stylesheet">
 <link href="user.css" rel="stylesheet">

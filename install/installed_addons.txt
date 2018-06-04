@@ -6,7 +6,7 @@ Category Images V 1.1 [35cae2b]
 https://apps.oscommerce.com/XsmVa&categoy-images&p=6
 ******************************************************************
 Purchase without Account for Bootstrap
-  Version 3.0.2 BS [a4869e9] 
+  Version 3.0.3 BS [a4869e9] 
 https://apps.oscommerce.com/5f3nn&purchase-without-account-bs
 ******************************************************************
 Modular Checkout pages BS Version 1.0.3 [dd17852]

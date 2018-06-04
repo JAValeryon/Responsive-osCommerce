@@ -38,7 +38,7 @@
     <li><strong>Address Book</strong> - We can deliver your products to another address other than yours! This is perfect to send birthday gifts direct to the birthday-person themselves.</li>
     <li><strong>Order History</strong> - View your history of purchases that you have made with us.</li>
     <li><strong>Products Reviews</strong> - Share your opinions on products with our other customers.</li>
-    <li><strong>Products Notifications</strong> - Receive updates to selected products.</li></ul>
+    <li><strong>Products Notifications</strong> - Receive updates to selected products.</li>
     <li><strong>Puntos</strong> - Get points for this order and pay part of your next order with points balance.</li></ul>
     ');
   define('MODULE_CONTENT_CHECKOUT_SUCCESS_PWA_KEEP_ACCOUNT_TEXT_DELETE_ACCOUNT', '<strong>Thank You, I do not wish to keep my customer data stored, please delete my customer data.</strong>');

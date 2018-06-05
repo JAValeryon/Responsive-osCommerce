@@ -17,13 +17,15 @@ https://apps.oscommerce.com/5q6qA&modular-shopping-cart-bs
 ******************************************************************
 
 
-Attention: The following Core Files have been modified and should not be replaced!
+Warning!: The following Files have been modified and should not be replaced! Compare & Update manually!
 
 
 /admin/customers.php 
 /admin/orders.php
 /admin/reviews.php 
 /admin/includes/classes/order.php
+/admin/invoice.php
+/admin/packingslip.php
 
 /checkout_shipping.php
 /checkout_shipping_address.php
@@ -33,8 +35,14 @@ Attention: The following Core Files have been modified and should not be replace
 /checkout_process.php
 /shopping_cart.php
 
+/includes/application_top.php
+/includes/template_top.php
 /includes/modules/downloads.php 
 /includes/modules/payment/paypal_standard.php
+/includes/modules/content/product_info/templates/tpl_cm_pi_price.php
+/includes/modules/content/checkout_payment_address/cm_cpa_payment_address.php
+/includes/modules/content/checkout_shipping_address/cm_csa_shipping_address.php
+
 
 /includes/languages/english/checkout_shipping.php
 /includes/languages/english/checkout_shipping_address.php
@@ -42,6 +50,9 @@ Attention: The following Core Files have been modified and should not be replace
 /includes/languages/english/checkout_payment_address.php
 /includes/languages/english/checkout_confirmation.php
 /includes/languages/english/shopping_cart.php
+/includes/languages/english/create_account_success.php
+/includes/languages/english/modules/content/shopping_cart/cm_sc_stock_notice.php
+/includes/languages/english/modules/content/checkout_success/cm_cs_pwa_keep_account.php
 
 /includes/languages/espanol/checkout_shipping.php
 /includes/languages/espanol/checkout_shipping_address.php

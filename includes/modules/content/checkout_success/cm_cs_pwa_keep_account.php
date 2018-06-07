@@ -4,7 +4,7 @@
 
   Modified for:
   Purchase without Account for Bootstrap
-  Version 3.0 BS 
+  Version 3.0.4 BS 
   by @raiwa 
   info@oscaddons.com
   www.oscaddons.com
@@ -74,7 +74,7 @@
               }
             }
           }
-          tep_redirect(tep_href_link('/ext/modules/content/account/set_password.php', '', 'SSL'));
+          tep_redirect(tep_href_link('ext/modules/content/account/set_password.php', '', 'SSL'));
         }
 
         ob_start();
@@ -99,7 +99,7 @@
     }
 
     function install() {
-      tep_db_query("insert into configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Current Version', 'MODULE_CONTENT_CHECKOUT_SUCCESS_PWA_KEEP_ACCOUNT_VERSION', '3.0 BS', 'Version info. It is read only.', '6', '1', 'tep_version_readonly(', now())");
+      tep_db_query("insert into configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Current Version', 'MODULE_CONTENT_CHECKOUT_SUCCESS_PWA_KEEP_ACCOUNT_VERSION', '3.0.4 BS', 'Version info. It is read only.', '6', '1', 'tep_version_readonly(', now())");
       tep_db_query("insert into configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Enable PWA Checkout Module', 'MODULE_CONTENT_CHECKOUT_SUCCESS_PWA_KEEP_ACCOUNT_STATUS', 'True', 'Must enable if PWA Login module is active to integrate within checkout success page.', '6', '1', 'tep_cfg_select_option(array(\'True\', \'False\'), ', now())");
       tep_db_query("insert into configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Sort Order', 'MODULE_CONTENT_CHECKOUT_SUCCESS_PWA_KEEP_ACCOUNT_SORT_ORDER', '600', 'Sort order of display. Lowest is displayed first.  Due to disabling product notifications, this module requires being installed above said module.', '6', '3', now())");
     }

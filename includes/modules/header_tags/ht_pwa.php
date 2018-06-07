@@ -3,7 +3,7 @@
   $Id$
 
   Purchase without Account for Bootstrap
-  Version 3.0 BS 
+  Version 3.0.4 BS 
   by @raiwa 
   info@oscaddons.com
   www.oscaddons.com
@@ -81,7 +81,7 @@ location.reload();
             // delete guest account if selected
             $this->delete_guest_account();
           }
-        } elseif ( (!defined('MODULE_CONTENT_PWA_LOGIN_KEEP_ACCOUNT') || MODULE_CONTENT_PWA_LOGIN_KEEP_ACCOUNT != 'True') && DOWNLOAD_ENABLED != 'true' ) {
+        } elseif ( (!defined('MODULE_CONTENT_CHECKOUT_SUCCESS_PWA_KEEP_ACCOUNT_STATUS') || MODULE_CONTENT_CHECKOUT_SUCCESS_PWA_KEEP_ACCOUNT_STATUS != 'True') && DOWNLOAD_ENABLED != 'true' ) {
           // delete guest account
           $this->delete_guest_account();
         }
@@ -142,7 +142,7 @@ $(document).ready(function() {
     }
 
     function install() {
-      tep_db_query("insert into configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Current Version', 'MODULE_HEADER_TAGS_PWA_VERSION', '3.0 BS', 'Version info. It is read only.', '6', '1', 'tep_version_readonly(', now())");
+      tep_db_query("insert into configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Current Version', 'MODULE_HEADER_TAGS_PWA_VERSION', '3.0.4 BS', 'Version info. It is read only.', '6', '1', 'tep_version_readonly(', now())");
       tep_db_query("insert into configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Enable PWA Guest Account Module?', 'MODULE_HEADER_TAGS_PWA_STATUS', 'True', 'Required module which adds scripts for PWA Guest Checkout.', '6', '1', 'tep_cfg_select_option(array(\'True\', \'False\'), ', now())");
       tep_db_query("insert into configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Sort Order', 'MODULE_HEADER_TAGS_PWA_SORT_ORDER', '1001', 'Sort order of display. Lowest is displayed first.', '6', '2', now())");
     }

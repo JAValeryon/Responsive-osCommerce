@@ -71,6 +71,7 @@
                               'postcode' => $order['customers_postcode'],
                               'state' => $order['customers_state'],
                               'country' => $order['customers_country'],
+                              'vatin' => '',
                               'format_id' => $order['customers_address_format_id'],
                               'telephone' => $order['customers_telephone'],
                               'email_address' => $order['customers_email_address']);
@@ -83,6 +84,7 @@
                               'postcode' => $order['delivery_postcode'],
                               'state' => $order['delivery_state'],
                               'country' => $order['delivery_country'],
+                              'vatin' => '',
                               'format_id' => $order['delivery_address_format_id']);
 
       $this->billing = array('name' => $order['billing_name'],
@@ -93,6 +95,7 @@
                              'postcode' => $order['billing_postcode'],
                              'state' => $order['billing_state'],
                              'country' => $order['billing_country'],
+                             'vatin' => $order['billing_vatin'],
                              'format_id' => $order['billing_address_format_id']);
 
       $index = 0;

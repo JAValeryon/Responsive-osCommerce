@@ -20,6 +20,6 @@
   
   <div class="alert alert-info"><?php echo MODULE_CONTENT_CHECKOUT_PAYMENT_ADDRESS_NEW_PAYMENT_ADDRESS_TEXT_CREATE_NEW_PAYMENT_ADDRESS; ?></div>
 
-  <?php require('includes/modules/checkout_new_address.php'); ?>
+  <?php require('includes/modules/checkout_new_payment_address.php'); ?>
 
 </div>

@@ -385,6 +385,7 @@
     $address_format = tep_db_fetch_array($address_format_query);
 
     $company = tep_output_string_protected($address['company']);
+    $vatin = isset($address['vatin'])?tep_output_string_protected($address['vatin']):'';
     if (isset($address['firstname']) && tep_not_null($address['firstname'])) {
       $firstname = tep_output_string_protected($address['firstname']);
       $lastname = tep_output_string_protected($address['lastname']);
@@ -441,9 +442,13 @@
 
     $fmt = $address_format['format'];
     eval("\$address = \"$fmt\";");
-
+ 
     if ( (ACCOUNT_COMPANY == 'true') && (tep_not_null($company)) ) {
       $address = $company . $cr . $address;
+    }
+    
+    if ( (ACCOUNT_VATIN == 'true') && (tep_not_null($vatin)) ) {
+      $address = ENTRY_VATIN . ': ' . $vatin . $cr . $address;
     }
 
     return $address;

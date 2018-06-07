@@ -329,22 +329,7 @@
         ?>
       </div>
     </div>
-<?php
-  if (ACCOUNT_COMPANY == 'true') {
-?>
-
-    <div class="form-group">
-      <label for="inputCompany" class="control-label col-sm-3"><?php echo ENTRY_COMPANY; ?></label>
-      <div class="col-sm-9">
-        <?php
-        echo tep_draw_input_field('company', NULL, 'id="inputCompany" placeholder="' . ENTRY_COMPANY_TEXT . '"');
-        ?>
-      </div>
-    </div>
-<?php
-  }
-?>
-
+      
     <div class="form-group has-feedback">
       <label for="inputStreet" class="control-label col-sm-3"><?php echo ENTRY_STREET_ADDRESS; ?></label>
       <div class="col-sm-9">

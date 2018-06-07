@@ -448,6 +448,7 @@
     $address_format = tep_db_fetch_array($address_format_query);
 
     $company = tep_output_string_protected($address['company']);
+    $vatin = isset($address['vatin'])?tep_output_string_protected($address['vatin']):'';
     if (isset($address['firstname']) && tep_not_null($address['firstname'])) {
       $firstname = tep_output_string_protected($address['firstname']);
       $lastname = tep_output_string_protected($address['lastname']);
@@ -507,7 +508,11 @@
     if ( (ACCOUNT_COMPANY == 'true') && (tep_not_null($company)) ) {
       $address = $company . $cr . $address;
     }
-
+    
+    if ( (ACCOUNT_VATIN == 'true') && (tep_not_null($vatin)) ) {
+      $address = ENTRY_VATIN . ': ' . $vatin . $cr . $address;
+    }
+    
     return $address;
   }
 
@@ -519,7 +524,7 @@
       return tep_address_format($address_id['address_format_id'], $address_id, $html, $boln, $eoln);
     }
 
-    $address_query = tep_db_query("select entry_firstname as firstname, entry_lastname as lastname, entry_company as company, entry_street_address as street_address, entry_suburb as suburb, entry_city as city, entry_postcode as postcode, entry_state as state, entry_zone_id as zone_id, entry_country_id as country_id from " . TABLE_ADDRESS_BOOK . " where customers_id = '" . (int)$customers_id . "' and address_book_id = '" . (int)$address_id . "'");
+    $address_query = tep_db_query("select entry_firstname as firstname, entry_lastname as lastname, entry_company as company, entry_vatin as vatin, entry_street_address as street_address, entry_suburb as suburb, entry_city as city, entry_postcode as postcode, entry_state as state, entry_zone_id as zone_id, entry_country_id as country_id from " . TABLE_ADDRESS_BOOK . " where customers_id = '" . (int)$customers_id . "' and address_book_id = '" . (int)$address_id . "'");
     $address = tep_db_fetch_array($address_query);
 
     $format_id = tep_get_address_format_id($address['country_id']);

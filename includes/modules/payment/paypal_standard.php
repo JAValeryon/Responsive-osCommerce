@@ -241,6 +241,7 @@
                                   'billing_postcode' => $order->billing['postcode'],
                                   'billing_state' => $order->billing['state'],
                                   'billing_country' => $order->billing['country']['title'],
+                                  'billing_vatin' => $order->billing['vatin'],
                                   'billing_address_format_id' => $order->billing['format_id'],
                                   'payment_method' => $order->info['payment_method'],
                                   'cc_type' => $order->info['cc_type'],

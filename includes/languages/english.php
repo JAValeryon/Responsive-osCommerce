@@ -79,6 +79,8 @@ define('ERROR_NO_PAYMENT_MODULE_SELECTED', 'Please select a payment method for y
 
 define('ENTRY_COMPANY', 'Company Name');
 define('ENTRY_COMPANY_TEXT', '');
+define('ENTRY_VATIN', 'VAT Number');
+define('ENTRY_VATIN_TEXT', '');
 define('ENTRY_GENDER', 'Gender');
 define('ENTRY_GENDER_ERROR', 'Please select your Gender.');
 define('ENTRY_GENDER_TEXT', '');

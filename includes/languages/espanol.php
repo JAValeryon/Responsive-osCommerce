@@ -79,6 +79,8 @@ define('ERROR_NO_PAYMENT_MODULE_SELECTED', 'Por favor, seleccione un método de 
 
 define('ENTRY_COMPANY', 'Nombre de la Empresa:');
 define('ENTRY_COMPANY_TEXT', '');
+define('ENTRY_VATIN', 'NIF');
+define('ENTRY_VATIN_TEXT', '');
 define('ENTRY_GENDER', 'Tratamiento:');
 define('ENTRY_GENDER_ERROR', 'Por favor seleccione un tratamiento.'); 
 define('ENTRY_GENDER_TEXT', '');

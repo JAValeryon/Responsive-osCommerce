@@ -81,6 +81,23 @@
   }
 ?>
 
+<?php
+  if (ACCOUNT_VATIN == 'true') {
+?>
+
+      <div class="form-group">
+        <label for="inputVATIN" class="control-label col-sm-3"><?php echo ENTRY_VATIN; ?></label>
+        <div class="col-sm-9">
+          <?php
+          echo tep_draw_input_field('vatin', (isset($entry['entry_vatin']) ? $entry['entry_vatin'] : ''), 'id="inputVATIN" placeholder="' . ENTRY_VATIN_TEXT . '"');
+          ?>
+        </div>
+      </div>
+
+<?php
+  }
+?>
+      
       <div class="form-group has-feedback">
         <label for="inputStreet" class="control-label col-sm-3"><?php echo ENTRY_STREET_ADDRESS; ?></label>
         <div class="col-sm-9">

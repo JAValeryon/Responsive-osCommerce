@@ -34,7 +34,7 @@
           <div class="panel-body">
             <?php echo tep_address_format($format_id, $addresses, true, ' ', '<br />'); ?>
           </div>
-          <div class="panel-footer text-center"><?php echo tep_draw_radio_field('address', $addresses['address_book_id'], ($addresses['address_book_id'] == $sendto)); ?></div>
+          <div class="panel-footer text-center"><?php echo tep_draw_radio_field_css('address','class="radio2x"', $addresses['address_book_id'], ($addresses['address_book_id'] == $sendto)); ?></div>
         </div>
       </div>
 

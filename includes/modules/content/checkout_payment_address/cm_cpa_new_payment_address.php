@@ -49,6 +49,7 @@
   
         if (ACCOUNT_GENDER == 'true') $gender = tep_db_prepare_input($_POST['gender']);
         if (ACCOUNT_COMPANY == 'true') $company = tep_db_prepare_input($_POST['company']);
+        if (ACCOUNT_VATIN == 'true') $vatin = tep_db_prepare_input($_POST['vatin']);
         $firstname = tep_db_prepare_input($_POST['firstname']);
         $lastname = tep_db_prepare_input($_POST['lastname']);
         $street_address = tep_db_prepare_input($_POST['street_address']);
@@ -144,6 +145,7 @@
   
           if (ACCOUNT_GENDER == 'true') $sql_data_array['entry_gender'] = $gender;
           if (ACCOUNT_COMPANY == 'true') $sql_data_array['entry_company'] = $company;
+          if (ACCOUNT_VATIN == 'true') $sql_data_array['entry_vatin'] = $vatin;
           if (ACCOUNT_SUBURB == 'true') $sql_data_array['entry_suburb'] = $suburb;
           if (ACCOUNT_STATE == 'true') {
             if ($zone_id > 0) {

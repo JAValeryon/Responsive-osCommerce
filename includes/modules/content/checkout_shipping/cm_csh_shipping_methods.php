@@ -37,7 +37,7 @@
     }
 
     function execute() {
-      global $oscTemplate, $order, $cartID, $cart, $shipping, $total_count, $total_weight, $free_shipping, $shipping_modules, $quotes, $quote, $currencies, $sessiontoken, $redirect_to_payment; // plus a dynamic one below
+      global $oscTemplate, $order, $cartID, $cart, $shipping, $sendto, $total_count, $total_weight, $free_shipping, $shipping_modules, $quotes, $quote, $currencies, $sessiontoken, $redirect_to_payment; // plus a dynamic one below
       
         require('includes/classes/order.php');
         $order = new order;

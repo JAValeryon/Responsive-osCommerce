@@ -16,6 +16,8 @@
   define('MODULE_CONTENT_FOOTER_INFORMATION_HEADING_TITLE', 'Información');
 
   define('MODULE_CONTENT_FOOTER_INFORMATION_SHIPPING', 'Envíos y Devoluciones');
-  define('MODULE_CONTENT_FOOTER_INFORMATION_PRIVACY', 'Privacidad y Política de Cookies');
-  define('MODULE_CONTENT_FOOTER_INFORMATION_CONDITIONS', 'Condiciones');
+  define('MODULE_CONTENT_FOOTER_INFORMATION_LEGAL_NOTICE', 'Aviso Legal');
+  define('MODULE_CONTENT_FOOTER_INFORMATION_PRIVACY', 'Política de Privacidad');
+  define('MODULE_CONTENT_FOOTER_INFORMATION_COOKIES', 'Política de Cookies');
+  define('MODULE_CONTENT_FOOTER_INFORMATION_CONDITIONS', 'Condiciones Generales de Venta');
   define('MODULE_CONTENT_FOOTER_INFORMATION_CONTACT', 'Contactar');

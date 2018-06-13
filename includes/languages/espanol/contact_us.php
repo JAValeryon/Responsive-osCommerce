@@ -21,3 +21,6 @@ define('ENTRY_ENQUIRY', 'Consulta:');
 define('ENTRY_ENQUIRY_TEXT', '');
 
 define('ERROR_ACTION_RECORDER', 'Error: Ya ha sido enviada una consulta. Por favor, inténtelo otra vez en %s minutos.');
+
+define('MATC_TEXT', '<strong> He leído y acepto la <a href="%s" target="_blank">Política de Privacidad</a>');
+define('MATC_TERMS_ALERT', 'Debe aceptar nuestra  Política de Privacidad para registrarse como cliente. Gracias');

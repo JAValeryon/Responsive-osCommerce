@@ -31,3 +31,6 @@ define('CATEGORY_ADDRESS', 'Your Address');
 define('CATEGORY_CONTACT', 'Your Contact Information');
 define('CATEGORY_OPTIONS', 'Options');
 define('CATEGORY_PASSWORD', 'Your Password');
+
+define('MATC_TEXT', '<strong> I have read and agree to the <a href="%s" target="_blank">Privacy Policy</a>');
+define('MATC_TERMS_ALERT', 'Please indicate that you have read and agree to the Privacy Policy.');

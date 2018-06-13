@@ -470,6 +470,7 @@
         ?>
       </div>
     </div>
+    
     <div class="form-group">
       <label for="inputNewsletter" class="control-label col-sm-3"><?php echo ENTRY_NEWSLETTER; ?></label>
       <div class="col-sm-9">
@@ -505,6 +506,19 @@
         ?>
       </div>
     </div>
+      
+     <div class="form-group has-feedback">
+      <label for="" class="control-label col-sm-3"></label>
+      <div class="col-sm-9">
+        <?php
+        //BOF MATC mattjt83
+        echo tep_draw_checkbox_field('matc', '', false, 'id="matc"') .  sprintf(MATC_TEXT, tep_href_link('privacy.php', tep_get_all_get_params(), 'SSL')) ;
+        //EOF MATC mattjt83
+        ?>
+      </div>
+    </div>	      
+      
+      
   </div>
 
   <div class="buttonSet">
@@ -514,7 +528,23 @@
 </div>
 
 </form>
+<script type="text/javascript">
+//BOF MATC mattjt83
+$(function(){
+$('form[name=create_account]').submit(function(){
+var return_value = false;
 
+if (!$('#matc').is(':checked')){
+alert("<?php echo MATC_TERMS_ALERT;?>");
+}else{
+return_value = true;
+}
+
+return return_value;
+});//eof submit function
+});
+//EOF MATC mattjt83
+</script>
 <?php
   require('includes/template_bottom.php');
   require('includes/application_bottom.php');

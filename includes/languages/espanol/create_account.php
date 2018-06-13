@@ -35,3 +35,6 @@ define('CATEGORY_ADDRESS', 'Dirección');
 define('CATEGORY_CONTACT', 'Información de Contacto');
 define('CATEGORY_OPTIONS', 'Opciones');
 define('CATEGORY_PASSWORD', 'Contraseña');
+
+define('MATC_TEXT', '<strong> He leído y acepto la <a href="%s" target="_blank">Política de Privacidad</a>');
+define('MATC_TERMS_ALERT', 'Debe aceptar nuestra  Política de Privacidad para registrarse como cliente. Gracias');

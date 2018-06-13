@@ -19,3 +19,6 @@
 define('NAVBAR_TITLE_3', 'Datos Personales');
 define('HEADING_TITLE', 'Sus Datos Personales');
 define('TEXT_ORIGIN_LOGIN', 'Si dispone ya de una cuenta en nuestra tienda, entre <a href="%s"><u>aquí</u></a> en su cuenta.');
+
+define('MATC_TEXT', '<strong> He leído y acepto la <a href="%s" target="_blank">Política de Privacidad</a>');
+define('MATC_TERMS_ALERT', 'Debe aceptar nuestra  Política de Privacidad para registrarse como cliente. Gracias');

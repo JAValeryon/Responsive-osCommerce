@@ -21,4 +21,8 @@ define('ENTRY_ENQUIRY', 'Enquiry');
 define('ENTRY_ENQUIRY_TEXT', '');
 
 define('ERROR_ACTION_RECORDER', 'Error: An enquiry has already been sent. Please try again in %s minutes.');
+
+define('MATC_TEXT', '<strong> I have read and agree to the <a href="%s" target="_blank">Privacy Policy</a>');
+define('MATC_TERMS_ALERT', 'Please indicate that you have read and agree to the Privacy Policy.');
+
 ?>

@@ -12,7 +12,7 @@
 
 define('TABLE_HEADING_NEW_PRODUCTS', 'Nuevos Productos en %s');
 
-define('TEXT_NO_PRODUCTS2', 'No hay productos en esta categoría.');
+define('TEXT_NO_PRODUCTS', 'No hay productos en esta categoría.');
 define('TEXT_NUMBER_OF_PRODUCTS', 'Número de Productos: ');
 define('TEXT_SHOW', '<STRONG>Mostrar:</STRONG>');
 define('TEXT_BUY', 'Compra 1 \'');

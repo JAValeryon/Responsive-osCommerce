@@ -513,6 +513,7 @@ function updateNet() {
     <div id="productTabs" style="overflow: auto;">
         <ul>
           <li><?php echo '<a href="' . substr(tep_href_link('categories.php', tep_get_all_get_params()), strlen($base_url)) . '#section_general_content">' . TAB_TITLE_GENERAL . '</a>'; ?></li>
+          <li><?php echo '<a href="' . substr(tep_href_link('categories.php', tep_get_all_get_params()), strlen($base_url)) . '#section_descriptions_content">' . TAB_TITLE_DESCRIPTIONS . '</a>'; ?></li>
           <li><?php echo '<a href="' . substr(tep_href_link('categories.php', tep_get_all_get_params()), strlen($base_url)) . '#section_images_content">' . TAB_TITLE_IMAGES . '</a>'; ?></li>
           <li><?php echo '<a href="' . substr(tep_href_link('categories.php', tep_get_all_get_params()), strlen($base_url)) . '#section_seo_content">' . TAB_TITLE_SEO . '</a>'; ?></li>
           <li><?php echo '<a href="' . substr(tep_href_link('categories.php', tep_get_all_get_params()), strlen($base_url)) . '#section_extra_content">' . TAB_TITLE_EXTRA . '</a>'; ?></li>
@@ -575,24 +576,7 @@ function updateNet() {
 <script type="text/javascript"><!--
 updateGross();
 //--></script>
-<?php
-    for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
-?>
-                <tr>
-            <td class="main" valign="top"><?php if ($i == 0) echo TEXT_PRODUCTS_DESCRIPTION; ?></td>
-            <td><table border="0" cellspacing="0" cellpadding="0">
-              <tr>
-                <td class="main" valign="top"><?php echo tep_image(tep_catalog_href_link('includes/languages/' . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], '', 'SSL'), $languages[$i]['name']); ?>&nbsp;</td>
-                <td class="main"><?php echo tep_draw_textarea_field_ckeditor('products_description[' . $languages[$i]['id'] . ']', 'soft', '70', '15', (empty($pInfo->products_id) ? '' : tep_get_products_description($pInfo->products_id, $languages[$i]['id'])), 'style="width: 75em"'); ?></td>
-              </tr>
-            </table></td>
-          </tr>
-<?php
-    }
-?>
-                <tr>
-                  <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-                </tr>
+
                 <tr>
                   <td class="main"><?php echo TEXT_PRODUCTS_QUANTITY; ?></td>
                   <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_quantity', $pInfo->products_quantity); ?></td>
@@ -636,6 +620,30 @@ updateGross();
                 </tr>          
             </table>                
         </div>
+        <div id="section_descriptions_content" style="padding: 10px;">
+            <table border="0" width="100%" cellspacing="0" cellpadding="2">  
+<?php
+    for ($i=0, $n=sizeof($languages); $i<$n; $i++) {
+?>
+                <tr style="height: 500px">
+                    <td class="main" valign="top"><?php if ($i == 0) echo TEXT_PRODUCTS_DESCRIPTION; ?></td>
+                    <td valign="top"><table border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                          <td class="main" valign="top"><?php echo tep_image(tep_catalog_href_link('includes/languages/' . $languages[$i]['directory'] . '/images/' . $languages[$i]['image'], '', 'SSL'), $languages[$i]['name']); ?>&nbsp;</td>
+                          <td class="main"><?php echo tep_draw_textarea_field_ckeditor('products_description[' . $languages[$i]['id'] . ']', 'soft', '70', '100', (empty($pInfo->products_id) ? '' : tep_get_products_description($pInfo->products_id, $languages[$i]['id'])), 'style="width: 75em; height: 500px;"'); ?></td>
+                        </tr>
+                        </table>
+                    </td>
+                </tr>
+<?php
+    }
+?>
+                <tr>
+                  <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+                </tr>               
+            </table>    
+        </div>
+        
         <div id="section_images_content" style="padding: 10px;">
             <table border="0" width="100%" cellspacing="0" cellpadding="2"> 
             <tr>

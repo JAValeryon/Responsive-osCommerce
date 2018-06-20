@@ -117,6 +117,7 @@ const TEXT_CATEGORIES_SEO_TITLE = 'Category Title for SEO:<br><small>Replaces th
 const TEXT_EDIT_CATEGORIES_SEO_TITLE = 'Edit the Category Title for SEO:<br><small>Replaces the category name in the &lt;title&gt; Meta Element<br>and optionally in the Breadcrumb Trail.<br>Leave blank to default to category name.</small>';
 
 const TAB_TITLE_GENERAL = 'General';
+const TAB_TITLE_DESCRIPTIONS = 'Descriptions';
 const TAB_TITLE_IMAGES = 'Images';
 const TAB_TITLE_SEO = 'SEO';
 const TAB_TITLE_EXTRA = 'Extra';

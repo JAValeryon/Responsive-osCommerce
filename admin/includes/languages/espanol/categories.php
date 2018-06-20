@@ -117,6 +117,7 @@ const TEXT_CATEGORIES_SEO_TITLE = 'Título de la Categoría para SEO:<br><small>
 const TEXT_EDIT_CATEGORIES_SEO_TITLE = 'Editar el título de la categoría para SEO:<br><small>Reemplaza el título de la categoría en la etiqueta Meta Element &lt;title&gt;<br>y opcionalmente en la ruta de navegación.<br>Dejar en blanco para usar por defecto el nombre de la categoría.</small>';
 
 const TAB_TITLE_GENERAL = 'General';
+const TAB_TITLE_DESCRIPTIONS = 'Descripciones';
 const TAB_TITLE_IMAGES = 'Imágenes';
 const TAB_TITLE_SEO = 'SEO';
 const TAB_TITLE_EXTRA = 'Extra';

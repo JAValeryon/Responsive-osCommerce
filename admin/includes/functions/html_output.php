@@ -311,6 +311,31 @@
     return $field;
   }
 
+ ////
+// Output a form textarea field
+// The $wrap parameter is no longer used in the core xhtml template
+  function tep_draw_textarea_field_ckeditor($name, $wrap, $width, $height, $text = '', $parameters = '', $reinsert_value = true) {
+    $field = '<textarea name="' . tep_output_string($name) . '" id="' . tep_output_string($name) . '" cols="' . tep_output_string($width) . '" rows="' . tep_output_string($height) . '"';
+
+    if (tep_not_null($parameters)) $field .= ' ' . $parameters;
+
+    $field .= '>';
+
+    if ( ($reinsert_value == true) && ( (isset($_GET[$name]) && is_string($_GET[$name])) || (isset($_POST[$name]) && is_string($_POST[$name])) ) ) {
+      if (isset($_GET[$name]) && is_string($_GET[$name])) {
+        $field .= tep_output_string_protected(stripslashes($_GET[$name]));
+      } elseif (isset($_POST[$name]) && is_string($_POST[$name])) {
+        $field .= tep_output_string_protected(stripslashes($_POST[$name]));
+      }
+    } elseif (tep_not_null($text)) {
+      $field .= tep_output_string_protected($text);
+    }
+
+    $field .= '</textarea>';
+
+    return $field;
+  } 
+  
 ////
 // Output a form hidden field
   function tep_draw_hidden_field($name, $value = '', $parameters = '') {

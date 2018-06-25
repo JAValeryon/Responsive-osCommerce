@@ -121,3 +121,12 @@ const TAB_TITLE_DESCRIPTIONS = 'Descripciones';
 const TAB_TITLE_IMAGES = 'Imágenes';
 const TAB_TITLE_SEO = 'SEO';
 const TAB_TITLE_EXTRA = 'Extra';
+
+const TEXT_PRODUCTS_SKU = "SKU";
+const TEXT_PRODUCTS_COD_STATUS = 'Admite Contrarreembolso:';
+const TEXT_PRODUCTS_USHIP_STATUS = 'Admite envío urgente:';
+const TEXT_PRODUCTS_CANARIAS_STATUS = 'Admite envío a las Islas Canarias:';
+const TEXT_PRODUCTS_GENERIC_ENABLED = 'Habilitado';
+const TEXT_PRODUCTS_GENERIC_DISABLED = 'No habilitado';
+const TEXT_PRODUCTS_GSHOPPING_STATUS = 'Publicar en Google Shopping:';
+const TEXT_PRODUCTS_GTAXONOMY = 'Taxonomía de Google:';

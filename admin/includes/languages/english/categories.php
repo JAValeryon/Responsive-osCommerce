@@ -121,3 +121,12 @@ const TAB_TITLE_DESCRIPTIONS = 'Descriptions';
 const TAB_TITLE_IMAGES = 'Images';
 const TAB_TITLE_SEO = 'SEO';
 const TAB_TITLE_EXTRA = 'Extra';
+
+const TEXT_PRODUCTS_SKU = 'SKU';
+const TEXT_PRODUCTS_COD_STATUS = 'Cash On Delivery Enabled:';
+const TEXT_PRODUCTS_USHIP_STATUS = 'Urgent Shipping Enabled:';
+const TEXT_PRODUCTS_CANARIAS_STATUS = 'Shipping to Canary Islands Enabled:';
+const TEXT_PRODUCTS_GENERIC_ENABLED = 'Enabled';
+const TEXT_PRODUCTS_GENERIC_DISABLED = 'Disabled';
+const TEXT_PRODUCTS_GSHOPPING_STATUS = 'Google Shopping Enabled:';
+const TEXT_PRODUCTS_GTAXONOMY = 'Google taxonomy:';

@@ -225,6 +225,12 @@
                                 'products_weight' => (float)tep_db_prepare_input($_POST['products_weight']),
                                 'products_status' => tep_db_prepare_input($_POST['products_status']),
                                 'products_tax_class_id' => tep_db_prepare_input($_POST['products_tax_class_id']),
+            			'products_cod_status' => tep_db_prepare_input($HTTP_POST_VARS['products_cod_status']),
+				'products_uship_status' => tep_db_prepare_input($HTTP_POST_VARS['products_uship_status']),
+                                'products_canarias_status' => tep_db_prepare_input($HTTP_POST_VARS['products_canarias_status']),
+                                'products_sku' => tep_db_prepare_input($HTTP_POST_VARS['products_sku']),
+                                'products_gshopping_status' => tep_db_prepare_input($HTTP_POST_VARS['products_gshopping_status']),
+                                'products_gtaxonomy' => tep_db_prepare_input($_POST['products_gtaxonomy']),
                                 'manufacturers_id' => (int)tep_db_prepare_input($_POST['manufacturers_id']));
         $sql_data_array['products_gtin'] = (tep_not_null($_POST['products_gtin'])) ? str_pad(tep_db_prepare_input($_POST['products_gtin']), 14, '0', STR_PAD_LEFT) : 'null';
         
@@ -408,6 +414,12 @@
                        'products_last_modified' => '',
                        'products_date_available' => '',
                        'products_status' => '',
+                       'products_cod_status' => '',
+                       'products_uship_status' => '',       
+                       'products_canarias_status' => '',
+		       'products_sku' => '',
+                       'products_gshopping_status' => '',
+                       'products_gtaxonomy' => '',
                        'products_tax_class_id' => '',
                        'manufacturers_id' => '');
     $parameters['products_gtin'] = '';
@@ -418,7 +430,7 @@
     $pInfo = new objectInfo($parameters);
 
     if (isset($_GET['pID']) && empty($_POST)) {
-      $product_query = tep_db_query("select pd.products_name, pd.products_description, pd.products_url, p.products_id, p.products_quantity, p.products_model, p.products_image, p.products_price, p.products_weight, p.products_date_added, p.products_last_modified, date_format(p.products_date_available, '%Y-%m-%d') as products_date_available, p.products_status, p.products_tax_class_id, p.manufacturers_id, p.products_gtin from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = '" . (int)$_GET['pID'] . "' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "'");
+      $product_query = tep_db_query("select pd.products_name, pd.products_description, pd.products_url, p.products_id, p.products_quantity, p.products_model, p.products_image, p.products_price, p.products_weight, p.products_date_added, p.products_last_modified, date_format(p.products_date_available, '%Y-%m-%d') as products_date_available, p.products_status, p.products_cod_status, p.products_uship_status, p.products_canarias_status, p.products_sku, p.products_gshopping_status, p.products_gtaxonomy, p.products_tax_class_id, p.manufacturers_id, p.products_gtin from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = '" . (int)$_GET['pID'] . "' and p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "'");
       $product = tep_db_fetch_array($product_query);
 
       $pInfo->objectInfo($product);
@@ -455,6 +467,34 @@
       default: $in_status = true; $out_status = false;
     }
 
+    if (!isset($pInfo->products_cod_status)) $pInfo->products_cod_status = '1';
+    switch ($pInfo->products_cod_status) {
+      case '0': $in_cod_status = true; $out_cod_status = false; break;
+      case '1':
+      default: $in_cod_status = false; $out_cod_status = true;
+    }	
+	
+    if (!isset($pInfo->products_uship_status)) $pInfo->products_uship_status = '1';
+    switch ($pInfo->products_uship_status) {
+      case '0': $in_uship_status = true; $out_uship_status = false; break;
+      case '1':
+      default: $in_uship_status = false; $out_uship_status = true;
+    }	 
+    
+    if (!isset($pInfo->products_canarias_status)) $pInfo->products_canarias_status = '1';
+    switch ($pInfo->products_canarias_status) {
+      case '0': $in_canarias_status = true; $out_canarias_status = false; break;
+      case '1':
+      default: $in_canarias_status = false; $out_canarias_status = true;
+    }	
+
+    if (!isset($pInfo->products_gshopping_status)) $pInfo->products_gshopping_status = '1';
+    switch ($pInfo->products_gshopping_status) {
+      case '0': $in_gshopping_status = false; $out_gshopping_status = true; break;
+      case '1':
+      default: $in_gshopping_status = true; $out_gshopping_status = false;
+    }	    
+    
     $form_action = (isset($_GET['pID'])) ? 'update_product' : 'insert_product';
 ?>
 <script type="text/javascript"><!--
@@ -591,6 +631,13 @@ updateGross();
                 <tr>
                   <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
                 </tr>
+                <tr>
+                  <td class="main"><?php echo TEXT_PRODUCTS_SKU; ?></td>
+                  <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_sku', $pInfo->products_sku); ?></td>
+                </tr>
+                <tr>
+                  <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+                </tr>                
                 <tr>
                   <td class="main"><?php echo TEXT_PRODUCTS_GTIN; ?></td>
                   <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_gtin', $pInfo->products_gtin); ?></td>
@@ -767,7 +814,39 @@ updateGross();
             </table>                        
         </div>
         <div id="section_extra_content" style="padding: 10px;">
-            <table border="0" width="100%" cellspacing="0" cellpadding="2"> 
+            <table class="table"> 
+                <tr>
+                  <td class="main"><?php echo TEXT_PRODUCTS_COD_STATUS; ?></td>
+                  <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_radio_field('products_cod_status', '0', $in_cod_status) . '&nbsp;' . TEXT_PRODUCTS_GENERIC_ENABLED . '&nbsp;' . tep_draw_radio_field('products_cod_status', '1', $out_cod_status) . '&nbsp;' . TEXT_PRODUCTS_GENERIC_DISABLED; ?></td>
+                </tr>
+                <tr>
+                  <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+                </tr> 
+                <tr>
+                  <td class="main"><?php echo TEXT_PRODUCTS_USHIP_STATUS; ?></td>
+                  <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_radio_field('products_uship_status', '0', $in_uship_status) . '&nbsp;' . TEXT_PRODUCTS_GENERIC_ENABLED . '&nbsp;' . tep_draw_radio_field('products_uship_status', '1', $out_uship_status) . '&nbsp;' . TEXT_PRODUCTS_GENERIC_DISABLED; ?></td>
+                </tr>			  
+                <tr>
+                  <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+                </tr>                
+                <tr>
+                  <td class="main"><?php echo TEXT_PRODUCTS_CANARIAS_STATUS; ?></td>
+                  <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_radio_field('products_canarias_status', '0', $in_canarias_status) . '&nbsp;' . TEXT_PRODUCTS_GENERIC_ENABLED . '&nbsp;' . tep_draw_radio_field('products_canarias_status', '1', $out_canarias_status) . '&nbsp;' . TEXT_PRODUCTS_GENERIC_DISABLED; ?></td>
+                </tr>			  
+                <tr>
+                  <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+                </tr> 
+                <tr bgcolor="#ebebff">
+                  <td class="main"><?php echo TEXT_PRODUCTS_GSHOPPING_STATUS; ?></td>
+                  <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_radio_field('products_gshopping_status', '1', $in_gshopping_status) . '&nbsp;' . TEXT_PRODUCTS_GENERIC_ENABLED . '&nbsp;' . tep_draw_radio_field('products_gshopping_status', '0', $out_gshopping_status) . '&nbsp;' . TEXT_PRODUCTS_GENERIC_DISABLED; ?></td>
+                </tr>	
+                <tr bgcolor="#ebebff">
+                  <td class="main"><?php echo TEXT_PRODUCTS_GTAXONOMY; ?></td>
+                  <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . tep_draw_input_field('products_gtaxonomy', $pInfo->products_gtaxonomy); ?></td>
+                </tr>                
+                <tr>
+                  <td colspan="2"><?php echo tep_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+                </tr>                   
                 <tr>
                   <td class="smallText" align="right"><?php echo tep_draw_hidden_field('products_date_added', (tep_not_null($pInfo->products_date_added) ? $pInfo->products_date_added : date('Y-m-d'))); ?></td>
                 </tr>                

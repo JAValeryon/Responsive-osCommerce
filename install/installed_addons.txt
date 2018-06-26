@@ -15,11 +15,15 @@ https://apps.oscommerce.com/89uS9&modular-checkout-pages-bs
 Modular Shopping Cart BS Version 2.0 [cd8e3f1]
 https://apps.oscommerce.com/5q6qA&modular-shopping-cart-bs
 ******************************************************************
+Customer Orders Tab in Admin Orders hook Version 1.6 []
+https://apps.oscommerce.com/ooCHM
+******************************************************************
+
 
 
 Warning!: The following Files have been modified and should not be replaced! Compare & Update manually!
 
-
+/admin/categories.php
 /admin/customers.php 
 /admin/invoice.php
 /admin/orders.php
@@ -31,6 +35,8 @@ Warning!: The following Files have been modified and should not be replaced! Com
 /admin/includes/functions/general.php
 /admin/includes/languages/english.php
 /admin/includes/languages/espanol.php
+/admin/includes/languages/espanol/categories.php
+/admin/includes/languages/english/categories.php
 
 /account_pwa.php
 /address_book.php
@@ -90,3 +96,5 @@ Warning!: The following Files have been modified and should not be replaced! Com
 /includes/languages/espanol/checkout_payment_address.php
 /includes/languages/espanol/checkout_confirmation.php
 /includes/languages/espanol/shopping_cart.php
+
+/install/oscommerce.sql

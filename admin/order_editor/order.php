@@ -53,22 +53,22 @@
                           'last_modified' => $order['last_modified'],
                           'shipping_method' => $shipping['title'],
                           'shipping_cost' => $shipping['cost'],
-						  'shipping_id' => $order['shipping_module'],
+			  'shipping_id' => $order['shipping_module'],
                           'subtotal' => 0,
                           'tax' => 0,
                           'tax_groups' => array());
                           
       $this->customer = array('id' => $order['customers_id'],
-	                          'name' => $order['customers_name'],
-							  'company' => $order['customers_company'],
+	                      'name' => $order['customers_name'],
+		              'company' => $order['customers_company'],
                               'street_address' => $order['customers_street_address'],
                               'suburb' => $order['customers_suburb'],
                               'city' => $order['customers_city'],
                               'postcode' => $order['customers_postcode'],
                               'state' => $order['customers_state'],
                               'country' => $order['customers_country'],
-							  'country_id' => oe_get_country_id($order['customers_country']),
-							  'zone_id' => oe_get_zone_id(oe_get_country_id($order['customers_country']), $order['customers_state']),  
+			      'country_id' => oe_get_country_id($order['customers_country']),
+			      'zone_id' => oe_get_zone_id(oe_get_country_id($order['customers_country']), $order['customers_state']),  
                               'format_id' => $order['customers_address_format_id'],
                               'telephone' => $order['customers_telephone'],
                               'email_address' => $order['customers_email_address']);
@@ -81,11 +81,12 @@
                               'postcode' => $order['delivery_postcode'],
                               'state' => $order['delivery_state'],
                               'country' => $order['delivery_country'],
-							  'country_id' => oe_get_country_id($order['delivery_country']),
-							  'zone_id' => oe_get_zone_id(oe_get_country_id($order['delivery_country']), $order['delivery_state']),
+			      'country_id' => oe_get_country_id($order['delivery_country']),
+			      'zone_id' => oe_get_zone_id(oe_get_country_id($order['delivery_country']), $order['delivery_state']),
                               'format_id' => $order['delivery_address_format_id']);
 
       $this->billing = array('name' => $order['billing_name'],
+                             'vatin' => $order['billing_vatin'],
                              'company' => $order['billing_company'],
                              'street_address' => $order['billing_street_address'],
                              'suburb' => $order['billing_suburb'],
@@ -93,8 +94,8 @@
                              'postcode' => $order['billing_postcode'],
                              'state' => $order['billing_state'],
                              'country' => $order['billing_country'],
-							 'country_id' => oe_get_country_id($order['billing_country']),
-							 'zone_id' => oe_get_zone_id(oe_get_country_id($order['billing_country']), $order['billing_state']),
+			     'country_id' => oe_get_country_id($order['billing_country']),
+			     'zone_id' => oe_get_zone_id(oe_get_country_id($order['billing_country']), $order['billing_state']),
                              'format_id' => $order['billing_address_format_id']);
 
 	  

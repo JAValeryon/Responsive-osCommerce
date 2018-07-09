@@ -175,6 +175,7 @@ if (isset($action)) {
                 'customers_telephone' => tep_db_input(tep_db_prepare_input($_POST['update_customer_telephone'])),
                 'customers_email_address' => tep_db_input(tep_db_prepare_input($_POST['update_customer_email_address'])),
                 'billing_name' => tep_db_input(tep_db_prepare_input(((isset($_POST['billing_same_as_customer']) && $_POST['billing_same_as_customer'] == 'on') ? $_POST['update_customer_name'] : $_POST['update_billing_name']))),
+                'billing_vatin' => tep_db_input(tep_db_prepare_input($_POST['update_billing_vatin'])),
                 'billing_company' => tep_db_input(tep_db_prepare_input(((isset($_POST['billing_same_as_customer']) && $_POST['billing_same_as_customer'] == 'on') ? $_POST['update_customer_company'] : $_POST['update_billing_company']))),
                 'billing_street_address' => tep_db_input(tep_db_prepare_input(((isset($_POST['billing_same_as_customer']) && $_POST['billing_same_as_customer'] == 'on') ? $_POST['update_customer_street_address'] : $_POST['update_billing_street_address']))),
                 'billing_suburb' => tep_db_input(tep_db_prepare_input(((isset($_POST['billing_same_as_customer']) && $_POST['billing_same_as_customer'] == 'on') ? $_POST['update_customer_suburb'] : $_POST['update_billing_suburb']))),
@@ -1309,6 +1310,10 @@ if (($action == 'edit') && ($order_exists == true)) {
                                                 <tr class="dataTableRow">
                                                     <td colspan="4" style="border-top: 1px solid #C9C9C9;"><?php echo tep_draw_separator('pixel_trans.gif', '1', '1'); ?></td>
                                                 </tr>
+                                                <tr class="dataTableRow"> 
+                                                    <td class="dataTableContent" valign="middle" align="right" nowrap><?php echo ENTRY_VATIN; ?></td>
+                                                    <td colspan="3" valign="top" class="dataTableContent"><input name="update_billing_vatin" size="37" value="<?php echo stripslashes($order->billing['vatin']); ?>" <?php if (ORDER_EDITOR_USE_AJAX == 'true') { ?>onChange="updateOrdersField('billing_vatin', encodeURIComponent(this.value))"<?php } ?>></td>
+                                                </tr>                                                
                                                 <tr class="dataTableRow"> 
                                                     <td class="dataTableContent" valign="middle" align="right" nowrap><?php echo ENTRY_NAME; ?></td>
                                                     <td colspan="3" valign="top" class="dataTableContent"><input name="update_billing_name" size="37" value="<?php echo stripslashes($order->billing['name']); ?>" <?php if (ORDER_EDITOR_USE_AJAX == 'true') { ?>onChange="updateOrdersField('billing_name', encodeURIComponent(this.value))"<?php } ?>></td>

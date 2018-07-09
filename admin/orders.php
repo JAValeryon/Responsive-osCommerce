@@ -569,6 +569,7 @@ $(function() {
       </tr>
     </table>
 <?php
+    //echo $OSCOM_Hooks->call('orders', 'orderList');
   }
 
   require('includes/template_bottom.php');

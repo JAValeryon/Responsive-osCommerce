@@ -1545,6 +1545,29 @@ INSERT INTO zones (zone_country_id, zone_code, zone_name) VALUES (195,'Vizcaya',
 INSERT INTO zones (zone_country_id, zone_code, zone_name) VALUES (195,'Zamora','Zamora');
 INSERT INTO zones (zone_country_id, zone_code, zone_name) VALUES (195,'Zaragoza','Zaragoza');
 
+# Portugal
+INSERT INTO zones (zone_country_id, zone_code, zone_name) VALUES (171, 'Braga', 'Braga');
+INSERT INTO zones (zone_country_id, zone_code, zone_name) VALUES (171, 'Viana', 'Viana do Castelo');
+INSERT INTO zones (zone_country_id, zone_code, zone_name) VALUES (171, 'Madeira', 'Madeira');
+INSERT INTO zones (zone_country_id, zone_code, zone_name) VALUES (171, 'Acores', 'Açores');
+INSERT INTO zones (zone_country_id, zone_code, zone_name) VALUES (171, 'Vila Real', 'Vila Real');
+INSERT INTO zones (zone_country_id, zone_code, zone_name) VALUES (171, 'Bragança', 'Bragança');
+INSERT INTO zones (zone_country_id, zone_code, zone_name) VALUES (171, 'Porto', 'Porto');
+INSERT INTO zones (zone_country_id, zone_code, zone_name) VALUES (171, 'Aveiro', 'Aveiro');
+INSERT INTO zones (zone_country_id, zone_code, zone_name) VALUES (171, 'Viseu', 'Viseu');
+INSERT INTO zones (zone_country_id, zone_code, zone_name) VALUES (171, 'Guarda', 'Guarda');
+INSERT INTO zones (zone_country_id, zone_code, zone_name) VALUES (171, 'Coimbra', 'Coímbra');
+INSERT INTO zones (zone_country_id, zone_code, zone_name) VALUES (171, 'Castelo Branco', 'Castelo Branco');
+INSERT INTO zones (zone_country_id, zone_code, zone_name) VALUES (171, 'Leiria', 'Leiria');
+INSERT INTO zones (zone_country_id, zone_code, zone_name) VALUES (171, 'Lisboa', 'Lisboa');
+INSERT INTO zones (zone_country_id, zone_code, zone_name) VALUES (171, 'Santarem', 'Santarém');
+INSERT INTO zones (zone_country_id, zone_code, zone_name) VALUES (171, 'Portalegre', 'Portalegre');
+INSERT INTO zones (zone_country_id, zone_code, zone_name) VALUES (171, 'Setubal', 'Setúbal');
+INSERT INTO zones (zone_country_id, zone_code, zone_name) VALUES (171, 'Évora', 'Évora');
+INSERT INTO zones (zone_country_id, zone_code, zone_name) VALUES (171, 'Beja', 'Beja');
+INSERT INTO zones (zone_country_id, zone_code, zone_name) VALUES (171, 'Faro', 'Faro');
+
+
 # Header Tags
 INSERT INTO configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) VALUES ('Installed Modules', 'MODULE_HEADER_TAGS_INSTALLED', 'ht_canonical.php;ht_manufacturer_title.php;ht_category_title.php;ht_product_title.php;ht_robot_noindex.php;ht_datepicker_jquery.php;ht_grid_list_view.php;ht_table_click_jquery.php;ht_breadcrumb_schema.php;ht_product_colorbox.php', 'List of header tag module filenames separated by a semi-colon. This is automatically updated. No need to edit.', '6', '0', now());
 INSERT INTO configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Enable Category Title Module', 'MODULE_HEADER_TAGS_CATEGORY_TITLE_STATUS', 'True', 'Do you want to allow category titles to be added to the page title?', '6', '1', 'tep_cfg_select_option(array(\'True\', \'False\'), ', now());

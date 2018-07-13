@@ -32,9 +32,11 @@ Warning!: The following Files have been modified and should not be replaced! Com
 /admin/packingslip.php
 /admin/reviews.php 
 
+/admin/includes/application_top.php
 /admin/includes/classes/order.php
 /admin/includes/functions/html_output.php
 /admin/includes/functions/general.php
+/admin/includes/functions/localization.php
 /admin/includes/languages/english.php
 /admin/includes/languages/espanol.php
 /admin/includes/languages/espanol/categories.php

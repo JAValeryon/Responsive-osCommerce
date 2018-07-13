@@ -10,22 +10,8 @@
   Released under the GNU General Public License
 */
 
-  function quote_oanda_currency($code, $base = DEFAULT_CURRENCY) {
-    $page = file('http://www.oanda.com/convert/fxdaily?value=1&redirected=1&exch=' . $code .  '&format=CSV&dest=Get+Table&sel_list=' . $base);
-
-    $match = array();
-
-    preg_match('/(.+),(\w{3}),([0-9.]+),([0-9.]+)/i', implode('', $page), $match);
-
-    if (sizeof($match) > 0) {
-      return $match[3];
-    } else {
-      return false;
-    }
-  }
-
   function quote_xe_currency($to, $from = DEFAULT_CURRENCY) {
-    $page = file('http://www.xe.net/ucc/convert.cgi?Amount=1&From=' . $from . '&To=' . $to);
+    $page = file('https://www.xe.com/currencyconverter/convert/?Amount=1&From=' . $from . '&To=' . $to);
 
     $match = array();
 
@@ -41,7 +27,7 @@
   function quote_fixer_currency($to, $from = DEFAULT_CURRENCY) {
     if ($to == $from) return 1;
     
-    $ch = curl_init('http://api.fixer.io/latest?base=' . $from . '&symbols=' . $to);
+    $ch = curl_init('http://data.fixer.io/api/latest?access_key=' . FIXER_ACCESS_KEY . '&base=' . $from . '&symbols=' . $to);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     $data = curl_exec($ch); 
     curl_close($ch); 
@@ -55,3 +41,19 @@
     }
   }
   
+  function quote_fcc_currency($to, $from = DEFAULT_CURRENCY) {
+    if ($to == $from) return 1;
+    
+    $ch = curl_init('https://free.currencyconverterapi.com/api/v5/convert?q='.$from.'_'.$to.'&compact=ultra');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $data = curl_exec($ch); 
+    curl_close($ch); 
+
+    $currencies = json_decode($data, true);
+    
+    if (isset($currencies[$from.'_'.$to])) {
+      return $currencies[$from.'_'.$to];
+    } else {
+      return false;
+    }
+  }  

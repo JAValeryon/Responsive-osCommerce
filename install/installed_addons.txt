@@ -56,6 +56,7 @@ Warning!: The following Files have been modified and should not be replaced! Com
 /user.css
 
 /includes/application_top.php
+/includes/template_bottom.php
 /includes/template_top.php
 
 /includes/classes/order.php

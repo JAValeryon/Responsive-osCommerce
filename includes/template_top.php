@@ -29,10 +29,7 @@
 <title><?php echo tep_output_string_protected($oscTemplate->getTitle()); ?></title>
 <base href="<?php echo (($request_type == 'SSL') ? HTTPS_SERVER : HTTP_SERVER) . DIR_WS_CATALOG; ?>">
 
-<link href="ext/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<!-- font awesome -->
-<script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js"></script>
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <link href="custom.css" rel="stylesheet">
 <link href="user.css" rel="stylesheet">
 

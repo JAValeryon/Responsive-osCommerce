@@ -41,7 +41,9 @@
 
   <?php require('includes/footer.php'); ?>
 
-<script src="ext/bootstrap/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!-- font awesome -->
+<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
 <?php echo $oscTemplate->getBlocks('footer_scripts'); ?>
 
 </body>

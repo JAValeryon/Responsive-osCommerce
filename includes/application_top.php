@@ -319,6 +319,13 @@
   require('includes/classes/message_stack.php');
   $messageStack = new messageStack;
 
+// include the password crypto functions
+  require('includes/functions/password_funcs.php');
+
+// include validation functions (right now only email address)
+  require('includes/functions/validations.php');
+
+
 // Shopping cart actions
   if (isset($_GET['action'])) {
 // redirect the customer to a friendly cookie-must-be-enabled page if cookies are disabled
@@ -346,12 +353,6 @@
 // include the who's online functions
   require('includes/functions/whos_online.php');
   tep_update_whos_online();
-
-// include the password crypto functions
-  require('includes/functions/password_funcs.php');
-
-// include validation functions (right now only email address)
-  require('includes/functions/validations.php');
 
 // split-page-results
   require('includes/classes/split_page_results.php');

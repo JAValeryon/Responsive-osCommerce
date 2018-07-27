@@ -33,7 +33,9 @@ Warning!: The following Files have been modified and should not be replaced! Com
 /admin/reviews.php 
 
 /admin/includes/application_top.php
+/admin/includes/template_bottom.php
 /admin/includes/classes/order.php
+/admin/includes/classes/phplot.php
 /admin/includes/functions/html_output.php
 /admin/includes/functions/general.php
 /admin/includes/functions/localization.php

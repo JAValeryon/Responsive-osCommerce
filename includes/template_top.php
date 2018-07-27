@@ -39,7 +39,7 @@
    <script src="ext/js/excanvas.min.js"></script>
 <![endif]-->
  
-<script src="ext/jquery/jquery-3.1.1.min.js"></script>
+<script src="ext/jquery/jquery-3.3.1.min.js"></script>
 
 <?php echo $oscTemplate->getBlocks('header_tags'); ?>
 </head>

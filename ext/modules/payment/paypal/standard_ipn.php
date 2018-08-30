@@ -63,7 +63,7 @@
     $order_id = (int)$HTTP_POST_VARS['invoice'];
     $customer_id = (int)$HTTP_POST_VARS['custom'];
 
-    $check_query = tep_db_query("select orders_status from orders where orders_id = '" . (int)$order_id . "' and customers_id = '" . (int)$customer_id . "'");
+    $check_query = tep_db_query("select orders_status from " . TABLE_ORDERS . " where orders_id = '" . (int)$order_id . "' and customers_id = '" . (int)$customer_id . "'");
 
     if (tep_db_num_rows($check_query)) {
       $check = tep_db_fetch_array($check_query);
@@ -75,7 +75,7 @@
           $new_order_status = OSCOM_APP_PAYPAL_PS_ORDER_STATUS_ID;
         }
 
-        tep_db_query("update orders set orders_status = '" . (int)$new_order_status . "', last_modified = now() where orders_id = '" . (int)$order_id . "'");
+        tep_db_query("update " . TABLE_ORDERS . " set orders_status = '" . (int)$new_order_status . "', last_modified = now() where orders_id = '" . (int)$order_id . "'");
 
         $sql_data_array = array('orders_id' => $order_id,
                                 'orders_status_id' => (int)$new_order_status,
@@ -83,7 +83,7 @@
                                 'customer_notified' => (SEND_EMAILS == 'true') ? '1' : '0',
                                 'comments' => '');
 
-        tep_db_perform('orders_status_history', $sql_data_array);
+        tep_db_perform(TABLE_ORDERS_STATUS_HISTORY, $sql_data_array);
 
         include(DIR_FS_CATALOG . 'includes/classes/order.php');
         $order = new order($order_id);
@@ -119,7 +119,7 @@
 
         for ($i=0, $n=sizeof($order->products); $i<$n; $i++) {
           if (STOCK_LIMITED == 'true') {
-            $stock_query = tep_db_query("select products_quantity from products where products_id = '" . tep_get_prid($order->products[$i]['id']) . "'");
+            $stock_query = tep_db_query("select products_quantity from " . TABLE_PRODUCTS . " where products_id = '" . tep_get_prid($order->products[$i]['id']) . "'");
             $stock_values = tep_db_fetch_array($stock_query);
 
             $stock_left = $stock_values['products_quantity'] - $order->products[$i]['qty'];
@@ -134,16 +134,16 @@
             }
 
             if ( $stock_values['products_quantity'] != $stock_left ) {
-              tep_db_query("update products set products_quantity = '" . (int)$stock_left . "' where products_id = '" . tep_get_prid($order->products[$i]['id']) . "'");
+              tep_db_query("update " . TABLE_PRODUCTS . " set products_quantity = '" . (int)$stock_left . "' where products_id = '" . tep_get_prid($order->products[$i]['id']) . "'");
 
               if ( ($stock_left < 1) && (STOCK_ALLOW_CHECKOUT == 'false') ) {
-                tep_db_query("update products set products_status = '0' where products_id = '" . tep_get_prid($order->products[$i]['id']) . "'");
+                tep_db_query("update " . TABLE_PRODUCTS . " set products_status = '0' where products_id = '" . tep_get_prid($order->products[$i]['id']) . "'");
               }
             }
           }
 
 // Update products_ordered (for bestsellers list)
-          tep_db_query("update products set products_ordered = products_ordered + " . sprintf('%d', $order->products[$i]['qty']) . " where products_id = '" . tep_get_prid($order->products[$i]['id']) . "'");
+          tep_db_query("update " . TABLE_PRODUCTS . " set products_ordered = products_ordered + " . sprintf('%d', $order->products[$i]['qty']) . " where products_id = '" . tep_get_prid($order->products[$i]['id']) . "'");
 
           if (isset($order->products[$i]['attributes'])) {
             for ($j=0, $n2=sizeof($order->products[$i]['attributes']); $j<$n2; $j++) {
@@ -159,7 +159,7 @@
         $email_order = STORE_NAME . "\n" .
                        EMAIL_SEPARATOR . "\n" .
                        EMAIL_TEXT_ORDER_NUMBER . ' ' . $order_id . "\n" .
-                       EMAIL_TEXT_INVOICE_URL . ' ' . tep_href_link('account_history_info.php', 'order_id=' . $order_id, 'SSL', false) . "\n" .
+                       EMAIL_TEXT_INVOICE_URL . ' ' . tep_href_link(FILENAME_ACCOUNT_HISTORY_INFO, 'order_id=' . $order_id, 'SSL', false) . "\n" .
                        EMAIL_TEXT_DATE_ORDERED . ' ' . strftime(DATE_FORMAT_LONG) . "\n\n";
         if ($order->info['comments']) {
           $email_order .= tep_db_output($order->info['comments']) . "\n\n";
@@ -198,8 +198,8 @@
           tep_mail('', SEND_EXTRA_ORDER_EMAILS_TO, EMAIL_TEXT_SUBJECT, $email_order, STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);
         }
 
-        tep_db_query("delete from customers_basket where customers_id = '" . (int)$customer_id . "'");
-        tep_db_query("delete from customers_basket_attributes where customers_id = '" . (int)$customer_id . "'");
+        tep_db_query("delete from " . TABLE_CUSTOMERS_BASKET . " where customers_id = '" . (int)$customer_id . "'");
+        tep_db_query("delete from " . TABLE_CUSTOMERS_BASKET_ATTRIBUTES . " where customers_id = '" . (int)$customer_id . "'");
       }
     }
   }

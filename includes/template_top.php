@@ -21,7 +21,7 @@
   }
 ?>
 <!DOCTYPE html>
-<html <?php echo HTML_PARAMS; ?>>
+<html<?php echo HTML_PARAMS; ?>>
 <head>
 <meta charset="<?php echo CHARSET; ?>">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -30,15 +30,12 @@
 <base href="<?php echo (($request_type == 'SSL') ? HTTPS_SERVER : HTTP_SERVER) . DIR_WS_CATALOG; ?>">
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<!-- font awesome -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+
 <link href="custom.css" rel="stylesheet">
 <link href="user.css" rel="stylesheet">
 
-<!--[if lt IE 9]>
-   <script src="ext/js/html5shiv.js"></script>
-   <script src="ext/js/respond.min.js"></script>
-   <script src="ext/js/excanvas.min.js"></script>
-<![endif]-->
- 
 <script src="ext/jquery/jquery-3.3.1.min.js"></script>
 
 <?php echo $oscTemplate->getBlocks('header_tags'); ?>

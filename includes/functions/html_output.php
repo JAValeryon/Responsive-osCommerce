@@ -394,7 +394,7 @@
       $button .= '<a id="btn' . $button_counter . '" href="' . $link . '"';
 
       if ( isset($params['newwindow']) ) {
-        $button .= ' target="_blank"';
+        $button .= ' target="_blank" rel="noopener"';
       }
     } else {
       $button .= '<button ';
@@ -412,7 +412,7 @@
     $button .= '">';
 
     if (isset($icon) && tep_not_null($icon)) {
-      $button .= ' <span class="' . $icon . '"></span> ';
+      $button .= ' <span class="' . $icon . '" aria-hidden="true"></span> ';
     }
 
     $button .= $title;

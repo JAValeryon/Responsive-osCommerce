@@ -23,10 +23,10 @@
   $paypal_express = new paypal_express();
 
   if ( !$paypal_express->check() || !$paypal_express->enabled ) {
-    tep_redirect(tep_href_link('shopping_cart.php', '', 'SSL'));
+    tep_redirect(tep_href_link(FILENAME_SHOPPING_CART, '', 'SSL'));
   }
 
-  require(DIR_FS_CATALOG . 'includes/languages/' . $language . '/create_account.php');
+  require(DIR_FS_CATALOG . 'includes/languages/' . $language . '/' . FILENAME_CREATE_ACCOUNT);
 
   if ( !tep_session_is_registered('sendto') ) {
     if ( tep_session_is_registered('customer_id') ) {
@@ -61,10 +61,6 @@
   $cartID = $cart->cartID;
 
   switch ($HTTP_GET_VARS['osC_Action']) {
-    case 'setECError':
-      tep_redirect(tep_href_link('shopping_cart.php', 'error_message=' . $paypal_express->_app->getDef('module_ec_error_setexpresscheckout_call'), 'SSL'));
-      break;
-
     case 'cancel':
       tep_session_unregister('appPayPalEcResult');
       tep_session_unregister('appPayPalEcSecret');
@@ -77,7 +73,7 @@
         tep_session_unregister('billto');
       }
 
-      tep_redirect(tep_href_link('shopping_cart.php', '', 'SSL'));
+      tep_redirect(tep_href_link(FILENAME_SHOPPING_CART, '', 'SSL'));
 
       break;
     case 'callbackSet':
@@ -132,7 +128,7 @@
         $log_sane['SHIPTOSTATE'] = $HTTP_POST_VARS['SHIPTOSTATE'];
         $log_sane['SHIPTOCOUNTRY'] = $HTTP_POST_VARS['SHIPTOCOUNTRY'];
 
-        $country_query = tep_db_query("select * from countries where countries_iso_code_2 = '" . tep_db_input($sendto['country_name']) . "' limit 1");
+        $country_query = tep_db_query("select * from " . TABLE_COUNTRIES . " where countries_iso_code_2 = '" . tep_db_input($sendto['country_name']) . "' limit 1");
         if (tep_db_num_rows($country_query)) {
           $country = tep_db_fetch_array($country_query);
 
@@ -144,7 +140,7 @@
         }
 
         if ($sendto['country_id'] > 0) {
-          $zone_query = tep_db_query("select * from zones where zone_country_id = '" . (int)$sendto['country_id'] . "' and (zone_name = '" . tep_db_input($sendto['zone_name']) . "' or zone_code = '" . tep_db_input($sendto['zone_name']) . "') limit 1");
+          $zone_query = tep_db_query("select * from " . TABLE_ZONES . " where zone_country_id = '" . (int)$sendto['country_id'] . "' and (zone_name = '" . tep_db_input($sendto['zone_name']) . "' or zone_code = '" . tep_db_input($sendto['zone_name']) . "') limit 1");
           if (tep_db_num_rows($zone_query)) {
             $zone = tep_db_fetch_array($zone_query);
 
@@ -244,8 +240,6 @@
           $counter = 0;
           $cheapest_rate = null;
           $cheapest_counter = $counter;
-          $selected_shipping_id = isset($HTTP_GET_VARS['osc_shipping_id']) ? $HTTP_GET_VARS['osc_shipping_id'] : null;
-          $selected_shipping_counter = null;
 
           foreach ($quotes_array as $quote) {
             $shipping_rate = $paypal_express->_app->formatCurrencyRaw($quote['cost'] + tep_calculate_tax($quote['cost'], $quote['tax']));
@@ -264,17 +258,10 @@
               $cheapest_counter = $counter;
             }
 
-            if (isset($selected_shipping_id) && ($selected_shipping_id == $quote['id'])) {
-              $selected_shipping_counter = $counter;
-              $log_sane['OSCOM_CUSTOMER_SELECTED_SHIPPING_RATE_ID'] = $quote['id'];
-            }
-
             $counter++;
           }
 
-          if ( isset($selected_shipping_counter) ) {
-            $params['L_SHIPPINGOPTIONISDEFAULT' . $selected_shipping_counter] = 'true';
-          } elseif ( method_exists($shipping_modules, 'get_first') ) { // select first shipping method
+          if ( method_exists($shipping_modules, 'get_first') ) { // select first shipping method
             $params['L_SHIPPINGOPTIONISDEFAULT0'] = 'true';
           } else { // select cheapest shipping method
             $params['L_SHIPPINGOPTIONISDEFAULT' . $cheapest_counter] = 'true';
@@ -303,7 +290,7 @@
       break;
     case 'retrieve':
       if ( ($cart->count_contents() < 1) || !isset($HTTP_GET_VARS['token']) || empty($HTTP_GET_VARS['token']) || !tep_session_is_registered('appPayPalEcSecret') ) {
-        tep_redirect(tep_href_link('shopping_cart.php', '', 'SSL'));
+        tep_redirect(tep_href_link(FILENAME_SHOPPING_CART, '', 'SSL'));
       }
 
       if ( !tep_session_is_registered('appPayPalEcResult') || ($appPayPalEcResult['TOKEN'] != $HTTP_GET_VARS['token']) ) {
@@ -331,11 +318,11 @@
       if ( $pass === true ) {
         if ( OSCOM_APP_PAYPAL_GATEWAY == '1' ) { // PayPal
           if ( $appPayPalEcResult['PAYMENTREQUEST_0_CUSTOM'] != $appPayPalEcSecret ) {
-            tep_redirect(tep_href_link('shopping_cart', '', 'SSL'));
+            tep_redirect(tep_href_link(FILENAME_SHOPPING_CART, '', 'SSL'));
           }
         } else { // Payflow
           if ( $appPayPalEcResult['CUSTOM'] != $appPayPalEcSecret ) {
-            tep_redirect(tep_href_link('shopping_cart', '', 'SSL'));
+            tep_redirect(tep_href_link(FILENAME_SHOPPING_CART, '', 'SSL'));
           }
         }
 
@@ -350,7 +337,7 @@
 
           $email_address = tep_db_prepare_input($appPayPalEcResult['EMAIL']);
 
-          $check_query = tep_db_query("select * from customers where customers_email_address = '" . tep_db_input($email_address) . "' limit 1");
+          $check_query = tep_db_query("select * from " . TABLE_CUSTOMERS . " where customers_email_address = '" . tep_db_input($email_address) . "' limit 1");
           if ( tep_db_num_rows($check_query) ) {
             $check = tep_db_fetch_array($check_query);
 
@@ -360,7 +347,7 @@
 
               $navigation->set_snapshot();
 
-              $login_url = tep_href_link('login.php', '', 'SSL');
+              $login_url = tep_href_link(FILENAME_LOGIN, '', 'SSL');
               $login_email_address = tep_output_string($appPayPalEcResult['EMAIL']);
 
       $output = <<<EOD
@@ -398,17 +385,17 @@ EOD;
               $sql_data_array['customers_telephone'] = $customers_telephone;
             }
 
-            tep_db_perform('customers', $sql_data_array);
+            tep_db_perform(TABLE_CUSTOMERS, $sql_data_array);
 
             $customer_id = tep_db_insert_id();
 
-            tep_db_query("insert into customers_info (customers_info_id, customers_info_number_of_logons, customers_info_date_account_created) values ('" . (int)$customer_id . "', '0', now())");
+            tep_db_query("insert into " . TABLE_CUSTOMERS_INFO . " (customers_info_id, customers_info_number_of_logons, customers_info_date_account_created) values ('" . (int)$customer_id . "', '0', now())");
 
 // Only generate a password and send an email if the Set Password Content Module is not enabled
             if ( !defined('MODULE_CONTENT_ACCOUNT_SET_PASSWORD_STATUS') || (MODULE_CONTENT_ACCOUNT_SET_PASSWORD_STATUS != 'True') ) {
               $customer_password = tep_create_random_value(max(ENTRY_PASSWORD_MIN_LENGTH, 8));
 
-              tep_db_perform('customers', array('customers_password' => tep_encrypt_password($customer_password)), 'update', 'customers_id = "' . (int)$customer_id . '"');
+              tep_db_perform(TABLE_CUSTOMERS, array('customers_password' => tep_encrypt_password($customer_password)), 'update', 'customers_id = "' . (int)$customer_id . '"');
 
 // build the message content
               $name = $customers_firstname . ' ' . $customers_lastname;
@@ -454,7 +441,7 @@ EOD;
         $ship_country_id = 0;
         $ship_address_format_id = 1;
 
-        $country_query = tep_db_query("select countries_id, address_format_id from countries where countries_iso_code_2 = '" . tep_db_input($ship_country) . "' limit 1");
+        $country_query = tep_db_query("select countries_id, address_format_id from " . TABLE_COUNTRIES . " where countries_iso_code_2 = '" . tep_db_input($ship_country) . "' limit 1");
         if ( tep_db_num_rows($country_query) ) {
           $country = tep_db_fetch_array($country_query);
 
@@ -463,7 +450,7 @@ EOD;
         }
 
         if ( $ship_country_id > 0 ) {
-          $zone_query = tep_db_query("select zone_id from zones where zone_country_id = '" . (int)$ship_country_id . "' and (zone_name = '" . tep_db_input($ship_zone) . "' or zone_code = '" . tep_db_input($ship_zone) . "') limit 1");
+          $zone_query = tep_db_query("select zone_id from " . TABLE_ZONES . " where zone_country_id = '" . (int)$ship_country_id . "' and (zone_name = '" . tep_db_input($ship_zone) . "' or zone_code = '" . tep_db_input($ship_zone) . "') limit 1");
           if (tep_db_num_rows($zone_query)) {
             $zone = tep_db_fetch_array($zone_query);
 
@@ -471,7 +458,7 @@ EOD;
           }
         }
 
-        $check_query = tep_db_query("select address_book_id from address_book where customers_id = '" . (int)$customer_id . "' and entry_firstname = '" . tep_db_input($ship_firstname) . "' and entry_lastname = '" . tep_db_input($ship_lastname) . "' and entry_street_address = '" . tep_db_input($ship_address) . "' and entry_suburb = '" . tep_db_input($ship_suburb) . "' and entry_postcode = '" . tep_db_input($ship_postcode) . "' and entry_city = '" . tep_db_input($ship_city) . "' and (entry_state = '" . tep_db_input($ship_zone) . "' or entry_zone_id = '" . (int)$ship_zone_id . "') and entry_country_id = '" . (int)$ship_country_id . "' limit 1");
+        $check_query = tep_db_query("select address_book_id from " . TABLE_ADDRESS_BOOK . " where customers_id = '" . (int)$customer_id . "' and entry_firstname = '" . tep_db_input($ship_firstname) . "' and entry_lastname = '" . tep_db_input($ship_lastname) . "' and entry_street_address = '" . tep_db_input($ship_address) . "' and entry_suburb = '" . tep_db_input($ship_suburb) . "' and entry_postcode = '" . tep_db_input($ship_postcode) . "' and entry_city = '" . tep_db_input($ship_city) . "' and (entry_state = '" . tep_db_input($ship_zone) . "' or entry_zone_id = '" . (int)$ship_zone_id . "') and entry_country_id = '" . (int)$ship_country_id . "' limit 1");
         if ( tep_db_num_rows($check_query) ) {
           $check = tep_db_fetch_array($check_query);
 
@@ -497,14 +484,14 @@ EOD;
             }
           }
 
-          tep_db_perform('address_book', $sql_data_array);
+          tep_db_perform(TABLE_ADDRESS_BOOK, $sql_data_array);
 
           $address_id = tep_db_insert_id();
 
           $sendto = $address_id;
 
           if ($customer_default_address_id < 1) {
-            tep_db_query("update customers set customers_default_address_id = '" . (int)$address_id . "' where customers_id = '" . (int)$customer_id . "'");
+            tep_db_query("update " . TABLE_CUSTOMERS . " set customers_default_address_id = '" . (int)$address_id . "' where customers_id = '" . (int)$customer_id . "'");
             $customer_default_address_id = $address_id;
           }
         }
@@ -568,10 +555,8 @@ EOD;
             }
           }
 
-          if (!tep_session_is_registered('shipping')) {
-            tep_session_register('shipping');
-            $shipping = false;
-          }
+          if (!tep_session_is_registered('shipping')) tep_session_register('shipping');
+          $shipping = false;
 
           if ( (tep_count_shipping_modules() > 0) || ($free_shipping == true) ) {
             if ($free_shipping == true) {
@@ -604,39 +589,13 @@ EOD;
               }
 
               if ($shipping_set == false) {
-                $shipping_selected = false;
-
-                $module = null;
-                $method = null;
-
-                if (is_array($shipping) && isset($shipping['id']) && (strpos($shipping['id'], '_') !== false)) {
-                  list($module, $method) = explode('_', $shipping['id']);
-                } elseif (is_string($shipping) && !empty($shipping) && (strpos($shipping, '_') !== false)) {
-                  list($module, $method) = explode('_', $shipping);
+                if ( method_exists($shipping_modules, 'get_first') ) { // select first shipping method
+                  $shipping = $shipping_modules->get_first();
+                } else { // select cheapest shipping method
+                  $shipping = $shipping_modules->cheapest();
                 }
 
-                foreach ($quotes as $quote) {
-                  if ($quote['id'] == $module) {
-                    foreach ($quote['methods'] as $m) {
-                      if ($m['id'] == $method) {
-                        $shipping = $quote['id'] . '_' . $m['id'];
-                        $shipping_selected = true;
-
-                        break 2;
-                      }
-                    }
-                  }
-                }
-
-                if ($shipping_selected === false) {
-                  if ( method_exists($shipping_modules, 'get_first') ) { // select first shipping method
-                    $shipping = $shipping_modules->get_first();
-                  } else { // select cheapest shipping method
-                    $shipping = $shipping_modules->cheapest();
-                  }
-
-                  $shipping = $shipping['id'];
-                }
+                $shipping = $shipping['id'];
               }
             }
           } else {
@@ -648,7 +607,7 @@ EOD;
               tep_session_register('appPayPalEcRightTurn');
               $appPayPalEcRightTurn = true;
 
-              tep_redirect(tep_href_link('checkout_shipping.php', '', 'SSL'));
+              tep_redirect(tep_href_link(FILENAME_CHECKOUT_SHIPPING_ADDRESS, '', 'SSL'));
             }
           }
 
@@ -666,7 +625,7 @@ EOD;
               if (isset($quote['error'])) {
                 tep_session_unregister('shipping');
 
-                tep_redirect(tep_href_link('checkout_shipping.php', '', 'SSL'));
+                tep_redirect(tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'));
               } else {
                 if ( (isset($quote[0]['methods'][0]['title'])) && (isset($quote[0]['methods'][0]['cost'])) ) {
                   $shipping = array('id' => $shipping,
@@ -684,12 +643,12 @@ EOD;
         }
 
         if ( tep_session_is_registered('shipping') ) {
-          tep_redirect(tep_href_link('checkout_confirmation.php', '', 'SSL'));
+          tep_redirect(tep_href_link(FILENAME_CHECKOUT_CONFIRMATION, '', 'SSL'));
         } else {
           tep_session_register('appPayPalEcRightTurn');
           $appPayPalEcRightTurn = true;
 
-          tep_redirect(tep_href_link('checkout_shipping.php', '', 'SSL'));
+          tep_redirect(tep_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'));
         }
       } else {
         if ( OSCOM_APP_PAYPAL_GATEWAY == '1' ) { // PayPal
@@ -698,7 +657,7 @@ EOD;
           $messageStack->add_session('header', $appPayPalEcResult['OSCOM_ERROR_MESSAGE'], 'error');
         }
 
-        tep_redirect(tep_href_link('shopping_cart', '', 'SSL'));
+        tep_redirect(tep_href_link(FILENAME_SHOPPING_CART, '', 'SSL'));
       }
 
       break;
@@ -706,7 +665,7 @@ EOD;
     default:
 // if there is nothing in the customers cart, redirect them to the shopping cart page
       if ( $cart->count_contents() < 1 ) {
-        tep_redirect(tep_href_link('shopping_cart', '', 'SSL'));
+        tep_redirect(tep_href_link(FILENAME_SHOPPING_CART, '', 'SSL'));
       }
 
       if ( OSCOM_APP_PAYPAL_EC_STATUS == '1' ) {
@@ -765,7 +724,7 @@ EOD;
           $item_params['L_PAYMENTREQUEST_0_AMT' . $line_item_no] = $product_price;
           $item_params['L_PAYMENTREQUEST_0_NUMBER' . $line_item_no] = $product['id'];
           $item_params['L_PAYMENTREQUEST_0_QTY' . $line_item_no] = $product['qty'];
-          $item_params['L_PAYMENTREQUEST_0_ITEMURL' . $line_item_no] = tep_href_link('product_info.php', 'products_id=' . $product['id'], 'NONSSL', false);
+          $item_params['L_PAYMENTREQUEST_0_ITEMURL' . $line_item_no] = tep_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $product['id'], 'NONSSL', false);
 
           if ( (DOWNLOAD_ENABLED == 'true') && isset($product['attributes']) ) {
             $item_params['L_PAYMENTREQUEST_0_ITEMCATEGORY' . $line_item_no] = $paypal_express->getProductType($product['id'], $product['attributes']);
@@ -873,7 +832,7 @@ EOD;
 
               $messageStack->add_session('checkout_address', $paypal_express->_app->getDef('module_ec_error_no_shipping_available'), 'error');
 
-              tep_redirect(tep_href_link('checkout_shipping.php', '', 'SSL'));
+              tep_redirect(tep_href_link(FILENAME_CHECKOUT_SHIPPING_ADDRESS, '', 'SSL'));
             }
           }
         }
@@ -883,7 +842,6 @@ EOD;
         $expensive_rate = 0;
         $cheapest_counter = $counter;
         $default_shipping = null;
-        $selected_shipping_id = null;
 
         foreach ($quotes_array as $quote) {
           $shipping_rate = $paypal_express->_app->formatCurrencyRaw($quote['cost'] + tep_calculate_tax($quote['cost'], $quote['tax']));
@@ -903,7 +861,6 @@ EOD;
 
           if (tep_session_is_registered('shipping') && ($shipping['id'] == $quote['id'])) {
             $default_shipping = $counter;
-            $selected_shipping_id = $shipping['id'];
           }
 
           $counter++;
@@ -936,12 +893,7 @@ EOD;
           $item_params['L_SHIPPINGOPTIONISDEFAULT' . $default_shipping] = 'true';
 
 // Instant Update
-          $item_params['CALLBACK'] = tep_href_link('ext/modules/payment/paypal/express.php', 'osC_Action=callbackSet' . (isset($selected_shipping_id) ? '&osc_shipping_id=' . $selected_shipping_id : ''), 'SSL', false, false);
-
-          if ( strpos($item_params['CALLBACK'], '&amp;') !== false ) {
-            $item_params['CALLBACK'] = str_replace('&amp;', '&', $item_params['CALLBACK']);
-          }
-
+          $item_params['CALLBACK'] = tep_href_link('ext/modules/payment/paypal/express.php', 'osC_Action=callbackSet', 'SSL', false, false);
           $item_params['CALLBACKTIMEOUT'] = '6';
           $item_params['CALLBACKVERSION'] = $paypal_express->api_version;
 
@@ -1041,16 +993,7 @@ EOD;
 
           tep_redirect($paypal_url . 'token=' . $response_array['TOKEN']);
         } else {
-          if ( isset($HTTP_GET_VARS['format']) && ($HTTP_GET_VARS['format'] == 'json') ) {
-            $result = array(
-              'token' => ''
-            );
-
-            echo json_encode($result);
-            exit;
-          }
-
-          tep_redirect(tep_href_link('shopping_cart', 'error_message=' . stripslashes($response_array['L_LONGMESSAGE0']), 'SSL'));
+          tep_redirect(tep_href_link(FILENAME_SHOPPING_CART, 'error_message=' . stripslashes($response_array['L_LONGMESSAGE0']), 'SSL'));
         }
       } else { // Payflow
         $params['CUSTOM'] = $appPayPalEcSecret;
@@ -1065,14 +1008,14 @@ EOD;
         if ( $response_array['RESULT'] == '0' ) {
           tep_redirect($paypal_url . 'token=' . $response_array['TOKEN']);
         } else {
-          tep_redirect(tep_href_link('shopping_cart', 'error_message=' . urlencode($response_array['OSCOM_ERROR_MESSAGE']), 'SSL'));
+          tep_redirect(tep_href_link(FILENAME_SHOPPING_CART, 'error_message=' . urlencode($response_array['OSCOM_ERROR_MESSAGE']), 'SSL'));
         }
       }
 
       break;
   }
 
-  tep_redirect(tep_href_link('shopping_cart', '', 'SSL'));
+  tep_redirect(tep_href_link(FILENAME_SHOPPING_CART, '', 'SSL'));
 
   require(DIR_FS_CATALOG . 'includes/application_bottom.php');
 ?>

@@ -15,3 +15,4 @@
 */
 
 define('MODULE_CFG_MODULE_CURRENCIES_TITLE', 'Update Currency');
+

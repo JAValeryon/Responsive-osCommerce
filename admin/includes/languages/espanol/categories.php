@@ -130,3 +130,7 @@ const TEXT_PRODUCTS_GENERIC_ENABLED = 'Habilitado';
 const TEXT_PRODUCTS_GENERIC_DISABLED = 'No habilitado';
 const TEXT_PRODUCTS_GSHOPPING_STATUS = 'Publicar en Google Shopping:';
 const TEXT_PRODUCTS_GTAXONOMY = 'Taxonomía de Google:';
+
+const TEXT_BUTTON_PREVIEW = "Vista Previa";
+const TEXT_BUTTON_CANCEL = "Cancelar";
+const TEXT_BUTTON_SAVE = "Guardar";

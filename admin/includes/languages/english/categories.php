@@ -130,3 +130,7 @@ const TEXT_PRODUCTS_GENERIC_ENABLED = 'Enabled';
 const TEXT_PRODUCTS_GENERIC_DISABLED = 'Disabled';
 const TEXT_PRODUCTS_GSHOPPING_STATUS = 'Google Shopping Enabled:';
 const TEXT_PRODUCTS_GTAXONOMY = 'Google taxonomy:';
+
+const TEXT_BUTTON_PREVIEW = 'Preview';
+const TEXT_BUTTON_CANCEL = 'Cancel';
+const TEXT_BUTTON_SAVE = 'Save';

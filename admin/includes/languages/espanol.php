@@ -102,6 +102,7 @@ define('BOX_REPORTS_PRODUCTS_PURCHASED', 'Los Mas Comprados');
 define('BOX_REPORTS_ORDERS_TOTAL', 'Total por Cliente');
 
 // tools text in includes/boxes/tools.php
+define('BOX_HEADING_ADMIN_MODULES', 'Módulos administrativos');
 define('BOX_HEADING_TOOLS', 'Herramientas');
 define('BOX_TOOLS_ACTION_RECORDER', 'Registro de Acciones');
 define('BOX_TOOLS_BACKUP', 'Copia de Seguridad');

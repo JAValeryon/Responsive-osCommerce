@@ -7,8 +7,10 @@
 
   Copyright (c) 2007 osCommerce
 
+
   Released under the GNU General Public License
 */
 
 define('NAVBAR_TITLE', 'Cart Contents');
 define('HEADING_TITLE', 'What\'s In My Cart?');
+

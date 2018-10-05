@@ -15,10 +15,12 @@
 </div>
 
 <footer>
-  <div class="footer">
+  <div class="jumbotron jumbotron-fluid jumbotron-footer">
     <div class="<?php echo BOOTSTRAP_CONTAINER; ?>">
-      <div class="row">
-        <?php echo $oscTemplate->getContent('footer'); ?>
+      <div class="footer">
+        <div class="row">
+          <?php echo $oscTemplate->getContent('footer'); ?>
+        </div>
       </div>
     </div>
   </div>

@@ -13,4 +13,4 @@
   define('MODULE_CONTENT_PI_MODEL_TITLE', 'Modelo');
   define('MODULE_CONTENT_PI_MODEL_DESCRIPTION', 'Muestra el modelo de productos en la página de información del producto.');
   
-  define('MODULE_CONTENT_PI_MODEL_DISPLAY_MODEL', 'Modelo: %s');
+  define('MODULE_CONTENT_PI_MODEL_DISPLAY_MODEL', 'Modelo: <span class="badge badge-primary badge-pill">%s</span>');

@@ -110,7 +110,7 @@
     $image .= ' class="';
 
     if (tep_not_null($responsive) && ($responsive === true)) {
-      $image .= 'img-responsive';
+      $image .= 'img-fluid';
     }
 
     if (tep_not_null($bootstrap_css)) $image .= ' ' . $bootstrap_css;
@@ -261,9 +261,7 @@
     return tep_draw_selection_field_css($name, 'radio', $parameters, $value, $checked, $compare);
   }  
   
-  
-  
-////
+
 // Output a form textarea field
 // The $wrap parameter is no longer used in the core xhtml template
   function tep_draw_textarea_field($name, $wrap, $width, $height, $text = '', $parameters = '', $reinsert_value = true) {

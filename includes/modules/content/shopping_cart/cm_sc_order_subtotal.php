@@ -39,7 +39,7 @@
 	  
       if ($cart->count_contents() > 0) {
 
-      	$sc_order_subtotal = '<p class="text-right"><strong>' . SUB_TITLE_SUB_TOTAL . ' ' . $currencies->format($cart->show_total()) . '</strong></p>';	  
+      	$sc_order_subtotal = '<h4 class="text-sm-right">' . SUB_TITLE_SUB_TOTAL . ' ' . $currencies->format($cart->show_total()) . '</h4>';	  
 		  
       	ob_start();
       	include('includes/modules/content/' . $this->group . '/templates/tpl_' . basename(__FILE__));

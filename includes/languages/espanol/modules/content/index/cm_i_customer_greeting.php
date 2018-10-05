@@ -13,6 +13,5 @@
   const MODULE_CONTENT_CUSTOMER_GREETING_TITLE       = 'Saludo al cliente';
   const MODULE_CONTENT_CUSTOMER_GREETING_DESCRIPTION = 'Muestra el módulo "Saludo al cliente" en la página de inicio.';
 														
-  const MODULE_CONTENT_CUSTOMER_GREETING_PERSONAL    = '¡Bienvenido/a de nuevo <strong>%s!</strong> ¿Le gustaria ver que <a role="button" class="btn btn-info btn-xs" href="%s">productos nuevos</a> hay disponibles?';
-  const MODULE_CONTENT_CUSTOMER_GREETING_GUEST       = 'Bienvenido/a <strong>Invitado/a!</strong> ¿Le gustaría <a role="button" class="btn btn-info btn-xs" href="%s">entrar en su cuenta</a> o preferiría <a role="button" class="btn btn-info btn-xs" href="%s">crear una cuenta nueva?</a>';
-														
+  const MODULE_CONTENT_CUSTOMER_GREETING_PERSONAL    = '<h4 class="alert-heading">¡Bienvenido/a de nuevo %s!</h4> ¿Le gustaria ver que <a class="alert-link" href="%s">novedades</a> hay disponibles?';
+  const MODULE_CONTENT_CUSTOMER_GREETING_GUEST       = '<h4 class="alert-heading">¡Bienvenido/a Invitado/a!</h4> ¿Le gustaría <a class="alert-link" href="%s">entrar en su cuenta</a> o preferiría <a class="alert-link" href="%s">crear una cuenta nueva?</a>';  

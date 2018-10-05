@@ -68,42 +68,64 @@
         }
       }
 	  
-      $products_name .= '<table class="table table-striped table-condensed">';
-    	$products_name .= '  <tbody>';
+      $products_name .= '<div class="table-responsive">';
+      $products_name .= '<table class="table table-condensed">';
+      $products_name .= ' <thead>'.
+        '<tr>'.
+          '<th class="d-none d-md-block">&nbsp;</th>'.
+          '<th>'. TABLE_HEADING_PRODUCT . '</th>'.
+          '<th>'. TABLE_HEADING_AVAILABILITY . '</th>'.
+          '<th>'. TABLE_HEADING_QUANTITY . '</th>'.          
+          '<th>'. TABLE_HEADING_REMOVE . '</th>'.
+          '<th class="text-right">'. TABLE_HEADING_PRICE . '</th>'.
+        '</tr>'.
+        '</thead>';     
       
-      for ($i=0, $n=sizeof($products); $i<$n; $i++) {
-      	$products_name .= '   <tr>';
-
-      	$products_name .= '      <td valign="top" align="center"><a href="' . tep_href_link('product_info.php', 'products_id=' . $products[$i]['id']) . '">' . tep_image('images/' . $products[$i]['image'], $products[$i]['name'], SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a></td>' .
-                        	'      <td valign="top"><a href="' . tep_href_link('product_info.php', 'products_id=' . $products[$i]['id']) . '"><strong>' . $products[$i]['name'] . '</strong></a>';
-
-        if (STOCK_CHECK == 'true') {
-        	$stock_check = tep_check_stock($products[$i]['id'], $products[$i]['quantity']);
-        	if (tep_not_null($stock_check)) {
-        		$any_out_of_stock = 1;
-
-        		$products_name .= $stock_check;
-        	}
-        }
-
+      
+      
+      
+      $products_name .= '  <tbody>';
+      
+    for ($i=0, $n=sizeof($products); $i<$n; $i++) {
+      $products_name .= '<tr>';
+        $products_name .= '<td class="d-none d-md-block"><a href="' . tep_href_link('product_info.php', 'products_id=' . $products[$i]['id']) . '">' . tep_image('images/' . $products[$i]['image'], htmlspecialchars($products[$i]['name']), SMALL_IMAGE_WIDTH, SMALL_IMAGE_HEIGHT) . '</a></td>';
+        $products_name .= '<th><a href="' . tep_href_link('product_info.php', 'products_id=' . $products[$i]['id']) . '">' . $products[$i]['name'] . '</a>';
         if (isset($products[$i]['attributes']) && is_array($products[$i]['attributes'])) {
           foreach($products[$i]['attributes'] as $option => $value) {
-        		$products_name .= '<br /><small><i> - ' . $products[$i][$option]['products_options_name'] . ' ' . $products[$i][$option]['products_options_values_name'] . '</i></small>';
-        	}
+            $products_name .= '<small><br><i> - ' . $products[$i][$option]['products_options_name'] . ' ' . $products[$i][$option]['products_options_values_name'] . '</i></small>';
+          }
+        }
+        $products_name .= '</th>';
+        
+        if (STOCK_CHECK == 'true') {
+          $stock_check = tep_check_stock($products[$i]['id'], $products[$i]['quantity']);
+          if (tep_not_null($stock_check)) {
+            $any_out_of_stock = 1;
+
+            $products_name .= '<td>' . $stock_check . '</td>';
+          }
+          else {
+            goto in_stock;
+          }
+        }
+        else {
+          in_stock:
+          $products_name .= '<td>' . TEXT_IN_STOCK . '</td>';
         }
 
-        $products_name .= '<br>' . tep_draw_input_field('cart_quantity[]', $products[$i]['quantity'], 'style="width: 65px;" min="0"', 'number') . tep_draw_hidden_field('products_id[]', $products[$i]['id']) . ' ' . 
-      									   tep_draw_button(CART_BUTTON_UPDATE, 'fas fa-sync', NULL, NULL, NULL, 'btn-info btn-xs') . ' ' . tep_draw_button(CART_BUTTON_REMOVE, 'fas fa-times', tep_href_link('shopping_cart.php', 'products_id=' . $products[$i]['id'] . '&action=remove_product'), NULL, NULL, 'btn-danger btn-xs');
-      	$products_name .= '     </td>';
+        $products_name .= '<td><div class="input-group">' . tep_draw_input_field('cart_quantity[]', $products[$i]['quantity'], 'style="width: 65px;" min="0"', 'number') . tep_draw_hidden_field('products_id[]', $products[$i]['id']) . '<div class="input-group-append">' . tep_draw_button(CART_BUTTON_UPDATE, null, NULL, NULL, NULL, 'btn-info') . '</div></div></td>';
 
-      	$products_name .= '     <td class="text-right"><strong>' . $currencies->display_price($products[$i]['final_price'], tep_get_tax_rate($products[$i]['tax_class_id']), $products[$i]['quantity']) . '</strong></td>' .
-      									  '   </tr>';
-      }
+        $products_name .= '<td>' . tep_draw_button(CART_BUTTON_REMOVE, null, tep_href_link('shopping_cart.php', 'products_id=' . $products[$i]['id'] . '&action=remove_product'), NULL, NULL, 'btn-danger btn-xs') .'  </td>'  ;
+        $products_name .= '<td class="text-right">' . $currencies->display_price($products[$i]['final_price'], tep_get_tax_rate($products[$i]['tax_class_id']), $products[$i]['quantity']) . '</td>';
+
+        $products_name .='</tr>';
+    }
       
 	    $products_name .= ' </tbody>';
 	    $products_name .= '</table>';
+            $products_name .= '</div>';
 
-      ob_start();
+        ob_start();
       	include('includes/modules/content/' . $this->group . '/templates/tpl_' . basename(__FILE__));
         $template = ob_get_clean();
 

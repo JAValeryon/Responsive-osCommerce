@@ -80,7 +80,7 @@
             $link_title = $category['name'];
           }
 
-          $result .= '<a href="' . tep_href_link('index.php', 'cPath=' . $category_link) . '">';
+          $result .= '<a class="list-group-item list-group-item-action" href="' . tep_href_link('index.php', 'cPath=' . $category_link) . '">';
           $result .= str_repeat($this->spacer_string, $this->spacer_multiplier * $level);
           $result .= $link_title . '</a>';
 

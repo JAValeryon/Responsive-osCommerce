@@ -11,9 +11,8 @@
 */
 ?>
 
-<div class="modular-header">
+<div class="row">
   <?php echo $oscTemplate->getContent('header'); ?>
-  <div class="clearfix"></div>
 </div>
 
 <div class="body-sans-header clearfix">

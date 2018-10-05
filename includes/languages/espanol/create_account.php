@@ -14,7 +14,7 @@ define('NAVBAR_TITLE', 'Crear una Cuenta');
 
 define('HEADING_TITLE', 'Datos de Mi Cuenta');
 
-define('TEXT_ORIGIN_LOGIN', '<span class="inputRequirement">NOTA:</span> Si ya ha pasado por este proceso y tiene una cuenta, por favor <a href="%s"><u>entre</u></a> en ella.');
+define('TEXT_ORIGIN_LOGIN', '<span class="text-danger">NOTA:</span> Si ya ha pasado por este proceso y tiene una cuenta, por favor <a class="alert-link" href="%s"><u>entre</u></a> en ella.');
 
 define('EMAIL_SUBJECT', 'Bienvenido a ' . STORE_NAME);
 define('EMAIL_GREET_MR', 'Estimado Sr. %s,' . "\n\n");
@@ -36,5 +36,5 @@ define('CATEGORY_CONTACT', 'Información de Contacto');
 define('CATEGORY_OPTIONS', 'Opciones');
 define('CATEGORY_PASSWORD', 'Contraseña');
 
-define('MATC_TEXT', '<strong> He leído y acepto la <a href="%s" target="_blank">Política de Privacidad</a>');
+define('MATC_TEXT', '<strong> He leído y acepto la <a href="%s" target="_blank">Política de Privacidad</a></strong>');
 define('MATC_TERMS_ALERT', 'Debe aceptar nuestra  Política de Privacidad para registrarse como cliente. Gracias');

@@ -14,3 +14,4 @@
   define('MODULE_CONTENT_SC_ORDER_SUBTOTAL_DESCRIPTION', 'Mostrar SubTotal del Pedido en la página de Carrito de Compra');
   
   define('SUB_TITLE_SUB_TOTAL', 'Subtotal:');
+  define('SUB_TITLE_TOTAL', 'Total:');

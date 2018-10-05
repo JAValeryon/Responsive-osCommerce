@@ -14,4 +14,3 @@
   define('MODULE_BOXES_SHOPPING_CART_DESCRIPTION', 'Mostrar contenido de la cesta de compra');
   define('MODULE_BOXES_SHOPPING_CART_BOX_TITLE', 'Cesta de compra');
   define('MODULE_BOXES_SHOPPING_CART_BOX_CART_EMPTY', '0 productos');
-?>

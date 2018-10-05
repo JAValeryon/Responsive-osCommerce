@@ -39,9 +39,9 @@
 	  
 	    if ($cart->count_contents() > 0) {
 	    	
-	    	$sc_checkout = '<div class="buttonSet">' . 
-      									  tep_draw_button(IMAGE_BUTTON_CHECKOUT, 'fa fa-angle-right', tep_href_link('checkout_shipping.php', '', 'SSL'), 'primary', NULL, 'btn-success') . 
-      								 '</div>';
+	    	$sc_checkout = '<div class="buttonSet"><div class="text-right">' . 
+      		  tep_draw_button(IMAGE_BUTTON_CHECKOUT, 'fa fa-angle-right', tep_href_link('checkout_shipping.php', '', 'SSL'), 'primary', NULL, 'btn-success btn-lg btn-block') . 
+      		  '</div></div>';
 		  
       	ob_start();
       	include('includes/modules/content/' . $this->group . '/templates/tpl_' . basename(__FILE__));

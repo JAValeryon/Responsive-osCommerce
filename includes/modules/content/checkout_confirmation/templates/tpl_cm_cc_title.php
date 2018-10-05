@@ -6,6 +6,8 @@
   info@oscaddons.com
   www.oscaddons.com
   
+  Modified by @Javaleryon for BS4
+  
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
 
@@ -15,9 +17,5 @@
 */
 ?>
 <div class="col-sm-<?php echo $content_width; ?> cm-cc-title">
-
-  <div class="page-header">
-    <h1 class="h3"><?php echo MODULE_CONTENT_CHECKOUT_CONFIRMATION_TITLE_PUBLIC_TITLE; ?></h1>
-  </div>
-
+    <h1 class="display-4"><?php echo MODULE_CONTENT_CHECKOUT_CONFIRMATION_TITLE_PUBLIC_TITLE; ?></h1>
 </div>

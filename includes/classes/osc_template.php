@@ -16,7 +16,7 @@
     var $_content = array();
     var $_grid_container_width = 12;
     var $_grid_content_width = BOOTSTRAP_CONTENT;
-    var $_grid_column_width = 0; // deprecated
+    var $_grid_column_width = 0;
     var $_data = array();
 
     function __construct() {
@@ -171,4 +171,4 @@
       return $result;
     }
   }
-?>
+  

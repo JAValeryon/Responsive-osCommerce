@@ -27,10 +27,13 @@ define('ENTRY_PRICE_TO', 'hasta:');
 define('ENTRY_DATE_FROM', 'De fecha de alta:');
 define('ENTRY_DATE_TO', 'hasta:');
 
-define('ENTRY_PRICE_FROM_TEXT', '');
-define('ENTRY_PRICE_TO_TEXT', '');
-define('ENTRY_DATE_FROM_TEXT', '');
-define('ENTRY_DATE_TO_TEXT', '');
+define('ENTRY_PRICE_FROM_TEXT', 'Desde');
+define('ENTRY_PRICE_TO_TEXT', 'Hasta');
+define('ENTRY_DATE_FROM_TEXT', 'Desde');
+define('ENTRY_DATE_TO_TEXT', 'Hasta');
+
+define('ENTRY_DATE', 'Fecha');
+define('ENTRY_PRICE', 'Precio');
 
 define('TEXT_SEARCH_HELP_LINK', '<span class="fa fa-info-circle"></span> Ayuda');
 

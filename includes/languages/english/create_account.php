@@ -14,7 +14,7 @@ define('NAVBAR_TITLE', 'Create an Account');
 
 define('HEADING_TITLE', 'My Account Information');
 
-define('TEXT_ORIGIN_LOGIN', '<font color="#FF0000"><small><strong>NOTE:</strong></small></font> If you already have an account with us, please login at the <a href="%s"><u>login page</u></a>.');
+define('TEXT_ORIGIN_LOGIN', '<span class="text-danger"><strong>NOTE:</strong></span> If you already have an account with us, please login at the <a class="alert-link" href="%s"><u>login page</u></a>.');
 
 define('EMAIL_SUBJECT', 'Welcome to ' . STORE_NAME);
 define('EMAIL_GREET_MR', 'Dear Mr. %s,' . "\n\n");
@@ -32,5 +32,6 @@ define('CATEGORY_CONTACT', 'Your Contact Information');
 define('CATEGORY_OPTIONS', 'Options');
 define('CATEGORY_PASSWORD', 'Your Password');
 
-define('MATC_TEXT', '<strong> I have read and agree to the <a href="%s" target="_blank">Privacy Policy</a>');
+define('MATC_TEXT', '<strong> I have read and agree to the <a href="%s" target="_blank">Privacy Policy</a></strong>');
 define('MATC_TERMS_ALERT', 'Please indicate that you have read and agree to the Privacy Policy.');
+

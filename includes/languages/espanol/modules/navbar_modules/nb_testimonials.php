@@ -13,5 +13,5 @@
   define('MODULE_NAVBAR_TESTIMONIALS_TITLE', 'Testimonios'); 
   define('MODULE_NAVBAR_TESTIMONIALS_DESCRIPTION', 'Mostrar el enlace a Testimonios en la barra de navegación.');
   
-  define('MODULE_NAVBAR_TESTIMONIALS_PUBLIC_TEXT', '<li><a href="' . tep_href_link('testimonials.php') . '"><i class="far fa-edit"></i><span class="hidden-sm"> Testimonios</span></a></li>');
+  define('MODULE_NAVBAR_TESTIMONIALS_PUBLIC_TEXT', '<a class="nav-link" href="' . tep_href_link('testimonials.php') . '"><i class="far fa-fw fa-edit"></i> Testimonios</a>');
   

@@ -1,5 +1,6 @@
 <?php
 /*
+<<<<<<< HEAD
   $Id$
 
   osCommerce, Open Source E-Commerce Solutions
@@ -8,6 +9,7 @@
   Copyright (c) 2018 osCommerce
 
   Released under the GNU General Public License
+
 */
 
   class cm_login_title {

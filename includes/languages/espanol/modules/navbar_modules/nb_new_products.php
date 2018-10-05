@@ -13,5 +13,5 @@
   define('MODULE_NAVBAR_NEW_PRODUCTS_TITLE', 'Nuevos Productos');
   define('MODULE_NAVBAR_NEW_PRODUCTS_DESCRIPTION', 'Mostrar enlace a Nuevos Productos en la barra de navegación.');
   
-  define('MODULE_NAVBAR_NEW_PRODUCTS_PUBLIC_TEXT', '<li><a href="' . tep_href_link('products_new.php') . '"><i class="fa fa-certificate"></i><span class="hidden-sm">  Nuevos Productos</span></a></li>');
+  define('MODULE_NAVBAR_NEW_PRODUCTS_PUBLIC_TEXT', '<i class="fa fa-fw fa-certificate"></i> Novedades');
   

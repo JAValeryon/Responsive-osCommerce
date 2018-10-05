@@ -19,17 +19,13 @@
   require('includes/template_top.php');
 ?>
 
-<div class="page-header">
-  <h1 class="h3"><?php echo HEADING_TITLE; ?></h1>
-</div>
+<h1 class="display-4"><?php echo HEADING_TITLE; ?></h1>
 
 <div class="contentContainer">
-  <div class="contentText">
-    <?php echo TEXT_INFORMATION; ?>
-  </div>
+  <?php echo TEXT_INFORMATION; ?>
 
   <div class="buttonSet">
-    <div class="text-right"><?php echo tep_draw_button(IMAGE_BUTTON_CONTINUE, 'fa fa-angle-right', tep_href_link('index.php')); ?></div>
+    <div class="text-right"><?php echo tep_draw_button(IMAGE_BUTTON_CONTINUE, 'fa fa-angle-right', tep_href_link('index.php'), null, null, 'btn-light btn-block btn-lg'); ?></div>
   </div>
 </div>
 

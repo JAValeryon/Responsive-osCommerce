@@ -18,8 +18,8 @@ define('SUB_TITLE_RATING', 'Evaluación:');
 define('SUB_TITLE_REVIEW_TEXT', 'Su Comentario...');
 
 define('TEXT_NO_HTML', '<small><font color="#ff0000"><b>NOTA:</b></font></small>&nbsp;No se traducirá el codigo HTML!');
-define('TEXT_BAD', '<small><font color="#ff0000"><b>MALO</b></font></small>');
-define('TEXT_GOOD', '<small><font color="#ff0000"><b>BUENO</b></font></small>');
+define('TEXT_BAD', '%s (Malo)');
+define('TEXT_GOOD', '%s (Bueno)');
 
 define('TEXT_REVIEW_RECEIVED', 'Gracias por su opinión. Se ha presentado al administrador de la web para su aprobación y deberá aparecer en breve.');
 

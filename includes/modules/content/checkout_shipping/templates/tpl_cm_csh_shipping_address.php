@@ -30,9 +30,9 @@
       </div>
     </div>
     <div class="col-sm-4">
-      <div class="panel panel-primary">
-        <div class="panel-heading"><?php echo MODULE_CONTENT_CHECKOUT_SHIPPING_SHIPPING_ADDRESS_TITLE_SHIPPING_ADDRESS; ?></div>
-        <div class="panel-body">
+      <div class="card bg-primary">
+        <div class="card-header border-primary"><?php echo MODULE_CONTENT_CHECKOUT_SHIPPING_SHIPPING_ADDRESS_TITLE_SHIPPING_ADDRESS; ?></div>
+        <div class="card-body">
           <?php echo tep_address_label($customer_id, $sendto, true, ' ', '<br />'); ?>
         </div>
       </div>

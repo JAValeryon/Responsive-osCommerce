@@ -18,3 +18,4 @@
   define('MODULE_CONTENT_CHECKOUT_CONFIRMATION_PRODUCTS_DESCRIPTION', 'Muestra los Productos y Totales del pedido en la página confirmación de pedido.');
 
   define('MODULE_CONTENT_CHECKOUT_CONFIRMATION_PRODUCTS_HEADING', 'Productos');
+  define('MODULE_CONTENT_CHECKOUT_CONFIRMATION_PRODUCTS_HEADING_QTY','Cantidad');

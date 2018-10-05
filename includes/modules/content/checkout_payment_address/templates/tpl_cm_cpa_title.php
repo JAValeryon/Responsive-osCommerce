@@ -16,8 +16,6 @@
 ?>
 <div class="col-sm-<?php echo $content_width; ?> cm-cpa-title">
 
-  <div class="page-header">
-    <h1 class="h3"><?php echo MODULE_CONTENT_CHECKOUT_PAYMENT_ADDRESS_TITLE_PUBLIC_TITLE; ?></h1>
-  </div>
+    <h1 class="display-4"><?php echo MODULE_CONTENT_CHECKOUT_PAYMENT_ADDRESS_TITLE_PUBLIC_TITLE; ?></h1>
 
 </div>

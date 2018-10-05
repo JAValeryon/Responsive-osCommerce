@@ -21,3 +21,12 @@
   define('MODULE_CONTENT_FOOTER_INFORMATION_COOKIES', 'Política de Cookies');
   define('MODULE_CONTENT_FOOTER_INFORMATION_CONDITIONS', 'Condiciones Generales de Venta');
   define('MODULE_CONTENT_FOOTER_INFORMATION_CONTACT', 'Contactar');
+
+    const MODULE_CONTENT_FOOTER_INFORMATION_DATA = array(
+    'privacy.php' => 'Política de Privacidad',
+    'cookies.php' => 'Política de Cookies',
+    'legal_notice.php' => 'Aviso Legal',
+    'conditions.php' => 'Condiciones Generales de Venta',
+    'shipping.php' => 'Envíos y Devoluciones',
+    'contact_us.php' => 'Contactar'
+  );

@@ -13,4 +13,4 @@
   define('MODULE_CONTENT_PI_DATE_AVAILABLE_TITLE', 'Fecha de disponibilidad');
   define('MODULE_CONTENT_PI_DATE_AVAILABLE_DESCRIPTION', 'Muestra la fecha disponible (si está configurada) en la página de información del producto.');
   
-  define('MODULE_CONTENT_PI_DATE_AVAILABLE_TEXT', 'Este producto estará disponible el %s.');
+  define('MODULE_CONTENT_PI_DATE_AVAILABLE_TEXT', 'Este producto estará disponible el <span class="badge badge-primary badge-pill">%s</span>');

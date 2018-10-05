@@ -23,10 +23,10 @@
       <div class="alert alert-warning"><?php echo MODULE_CONTENT_CHECKOUT_PAYMENT_ADDRESS_PAYMENT_ADDRESS_TEXT_SELECTED_PAYMENT_DESTINATION; ?></div>
     </div>
     <div class="col-sm-4">
-      <div class="panel panel-primary">
-        <div class="panel-heading"><?php echo MODULE_CONTENT_CHECKOUT_PAYMENT_ADDRESS_PAYMENT_ADDRESS_TITLE_PAYMENT_ADDRESS; ?></div>
+      <div class="card border-primary mb-3">
+        <div class="card-header bg-primary"><?php echo MODULE_CONTENT_CHECKOUT_PAYMENT_ADDRESS_PAYMENT_ADDRESS_TITLE_PAYMENT_ADDRESS; ?></div>
 
-        <div class="panel-body">
+        <div class="card-body">
           <?php echo tep_address_label($customer_id, $billto, true, ' ', '<br />'); ?>
         </div>
       </div>

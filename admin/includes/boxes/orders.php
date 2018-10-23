@@ -17,6 +17,11 @@
         'code' => 'orders.php',
         'title' => BOX_ORDERS_ORDERS,
         'link' => tep_href_link('orders.php')
+      ),
+      array(
+        'code' => 'create_order.php',
+        'title' => BOX_ORDERS_CREATE_ORDER,
+        'link' => tep_href_link('create_order.php')
       )
     )
   );

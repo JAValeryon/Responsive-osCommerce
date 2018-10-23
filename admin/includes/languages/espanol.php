@@ -86,6 +86,7 @@ define('BOX_CUSTOMERS_CUSTOMERS', 'Clientes');
 // orders box text in includes/boxes/orders.php
 define('BOX_HEADING_ORDERS', 'Pedidos');
 define('BOX_ORDERS_ORDERS', 'Pedidos');
+define('BOX_ORDERS_CREATE_ORDER','Crear Nuevo Pedido');
 
 // taxes box text in includes/boxes/taxes.php
 define('BOX_HEADING_LOCATION_AND_TAXES', 'Zonas/Impuestos');

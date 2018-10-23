@@ -174,7 +174,9 @@ define('IMAGE_BUTTON_WRITE_REVIEW', 'Escribir Comentario');
 define('SMALL_IMAGE_BUTTON_DELETE', 'Eliminar');
 define('SMALL_IMAGE_BUTTON_EDIT', 'Modificar');
 define('SMALL_IMAGE_BUTTON_VIEW', 'Ver');
-define('SMALL_IMAGE_BUTTON_BUY', 'Comprar');
+define('SMALL_IMAGE_BUTTON_BUY', 'Añadir a la cesta');
+define('SMALL_IMAGE_BUTTON_PRE_ORDER', 'Reservar');
+define('SMALL_IMAGE_BUTTON_NOSTOCK', 'Agotado');
 
 define('ICON_ARROW_RIGHT', 'más');
 

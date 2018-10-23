@@ -188,8 +188,15 @@
       if (PRODUCT_LIST_BUY_NOW > 0) {
         $prod_list_contents .= '<div class="col-sm-12 col-md-8 text-md-right">' . PHP_EOL;
           $prod_list_contents .= '<div class="btn-group" role="group">' . PHP_EOL;
-            $prod_list_contents .= '<a role="button" href="' . tep_href_link('product_info.php', 'products_id=' . (int)$listing['products_id']) . '" class="btn btn-light btn-sm btn-product-listing btn-view">' . SMALL_IMAGE_BUTTON_VIEW . '</a>' . PHP_EOL;
-            $prod_list_contents .=  tep_draw_button(SMALL_IMAGE_BUTTON_BUY, 'fa fa-shopping-cart', tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('action')) . 'action=buy_now&products_id=' . (int)$listing['products_id']), NULL, array('params' => 'data-has-attributes="' . ((tep_has_product_attributes((int)$listing['products_id']) === true) ? '1' : '0') . '" data-in-stock="' . (int)$listing['in_stock'] . '" data-product-id="' . (int)$listing['products_id'] . '"'), 'btn-success btn-sm btn-product-listing btn-buy') . PHP_EOL;
+	    if ($listing['products_date_available'] > date('Y-m-d H:i:s')) {
+	      $prod_list_contents .= tep_draw_button(SMALL_IMAGE_BUTTON_PRE_ORDER, 'fa fa-shopping-cart', tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('action')) . 'action=buy_now&products_id=' . (int)$listing['products_id']), NULL, array('params' => 'data-has-attributes="' . ((tep_has_product_attributes((int)$listing['products_id']) === true) ? '1' : '0') . '" data-in-stock="' . (int)$listing['in_stock'] . '" data-product-id="' . (int)$listing['products_id'] . '"'), 'btn-warning btn-sm btn-product-listing btn-buy') . PHP_EOL;
+	    }
+	    elseif ($listing['in_stock'] < 1) {
+	      $prod_list_contents .= tep_draw_button(SMALL_IMAGE_BUTTON_NOSTOCK,'',NULL,'',array('params' => 'data-has-attributes="' . ((tep_has_product_attributes((int)$listing['products_id']) === true) ? '1' : '0') . '" data-in-stock="' . (int)$listing['in_stock'] . '" data-product-id="' . (int)$listing['products_id'] . '"'),'btn-danger btn-sm btn-product-listing');	  
+	    }
+            else {
+              $prod_list_contents .=  tep_draw_button(SMALL_IMAGE_BUTTON_BUY, 'fa fa-shopping-cart', tep_href_link(basename($PHP_SELF), tep_get_all_get_params(array('action')) . 'action=buy_now&products_id=' . (int)$listing['products_id']), NULL, array('params' => 'data-has-attributes="' . ((tep_has_product_attributes((int)$listing['products_id']) === true) ? '1' : '0') . '" data-in-stock="' . (int)$listing['in_stock'] . '" data-product-id="' . (int)$listing['products_id'] . '"'), 'btn-success btn-sm btn-product-listing btn-buy') . PHP_EOL;
+            }
           $prod_list_contents .= '</div>' . PHP_EOL;
         $prod_list_contents .= '</div>' . PHP_EOL;
       }

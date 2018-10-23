@@ -30,7 +30,15 @@
                 echo '<a role="button" href="' . tep_href_link('product_info.php', 'products_id=' . (int)$card_products['products_id']) . '" class="btn btn-light btn-sm btn-index btn-view">' . MODULE_CONTENT_CARD_PRODUCTS_BUTTON_VIEW . '</a>';
                 break;
                 case 'Buy':
-                echo '<a role="button" href="' . tep_href_link($PHP_SELF, tep_get_all_get_params(array('action')) . 'action=buy_now&products_id=' . (int)$card_products['products_id']) . '" data-has-attributes="' . ((tep_has_product_attributes((int)$card_products['products_id']) === true) ? '1' : '0') . '" data-in-stock="' . (int)$card_products['in_stock'] . '" data-product-id="' . (int)$card_products['products_id'] . '" class="btn btn-success btn-sm btn-index btn-buy">' . MODULE_CONTENT_CARD_PRODUCTS_BUTTON_BUY . '</a>';
+                    if ($card_products['products_date_available'] > date('Y-m-d H:i:s')) {
+                      echo '<a role="button" href="' . tep_href_link($PHP_SELF, tep_get_all_get_params(array('action')) . 'action=buy_now&products_id=' . (int)$card_products['products_id']) . '" data-has-attributes="' . ((tep_has_product_attributes((int)$card_products['products_id']) === true) ? '1' : '0') . '" data-in-stock="' . (int)$card_products['in_stock'] . '" data-product-id="' . (int)$card_products['products_id'] . '" class="btn btn-warning btn-sm btn-index btn-buy">' . SMALL_IMAGE_BUTTON_PRE_ORDER . '</a>';
+                    }
+                    elseif ($card_products['in_stock'] < 1) {
+                      echo '<a role="button" href="' . tep_href_link('product_info.php', 'products_id=' . (int)$card_products['products_id']) . '" data-has-attributes="' . ((tep_has_product_attributes((int)$card_products['products_id']) === true) ? '1' : '0') . '" data-in-stock="' . (int)$card_products['in_stock'] . '" data-product-id="' . (int)$card_products['products_id'] . '" class="btn btn-danger btn-sm btn-index btn-buy">' . SMALL_IMAGE_BUTTON_NOSTOCK . '</a>';
+                    }
+                    else {
+                      echo '<a role="button" href="' . tep_href_link($PHP_SELF, tep_get_all_get_params(array('action')) . 'action=buy_now&products_id=' . (int)$card_products['products_id']) . '" data-has-attributes="' . ((tep_has_product_attributes((int)$card_products['products_id']) === true) ? '1' : '0') . '" data-in-stock="' . (int)$card_products['in_stock'] . '" data-product-id="' . (int)$card_products['products_id'] . '" class="btn btn-success btn-sm btn-index btn-buy">' . MODULE_CONTENT_CARD_PRODUCTS_BUTTON_BUY . '</a>';
+                    }                
                 break;
               }               
               ?>

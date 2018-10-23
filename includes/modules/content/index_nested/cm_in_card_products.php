@@ -42,7 +42,7 @@
       $content_width = MODULE_CONTENT_IN_CARD_PRODUCTS_CONTENT_WIDTH;
       
       $card_products_query = tep_db_query("select 
-      distinct p.products_id, p.products_image, p.products_tax_class_id, 
+      distinct p.products_id, p.products_image, p.products_tax_class_id, p.products_date_available,  
       pd.products_name, if(s.status, s.specials_new_products_price, p.products_price) 
         as products_price, p.products_quantity as in_stock, p.manufacturers_id, 
       if(s.status, 1, 0) as is_special 

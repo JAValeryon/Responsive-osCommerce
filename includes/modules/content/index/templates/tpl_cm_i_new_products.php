@@ -16,10 +16,17 @@
           <p class="text-center" itemprop="offers" itemscope itemtype="http://schema.org/Offer"><meta itemprop="priceCurrency" content="<?php echo tep_output_string($currency); ?>" /><span itemprop="price" content="<?php echo $currencies->display_raw($new_products['products_price'], tep_get_tax_rate($new_products['products_tax_class_id'])); ?>"><?php echo $currencies->display_price($new_products['products_price'], tep_get_tax_rate($new_products['products_tax_class_id'])); ?></span></p>
           <div class="text-center">
             <div class="btn-group">
-              <a href="<?php echo tep_href_link('product_info.php', tep_get_all_get_params(array('action')) . 'products_id=' . (int)$new_products['products_id']); ?>" class="btn btn-default" role="button"><?php echo MODULE_CONTENT_NEW_PRODUCTS_BUTTON_VIEW; ?></a>
-              <?php
-              echo '<a href="' . tep_href_link($PHP_SELF, tep_get_all_get_params(array('action')) . 'action=buy_now&products_id=' . (int)$new_products['products_id']) . '" data-has-attributes="' . ((tep_has_product_attributes((int)$new_products['products_id']) === true) ? '1' : '0') . '" data-in-stock="' . (int)$new_products['in_stock'] . '" data-product-id="' . (int)$new_products['products_id'] . '" class="btn btn-success btn-index btn-buy" role="button">' . MODULE_CONTENT_NEW_PRODUCTS_BUTTON_BUY . '</a>';
-              ?>
+            <?php    
+               if ($new_products['products_date_available'] > date('Y-m-d H:i:s')) {
+                 echo '<a role="button" href="' . tep_href_link($PHP_SELF, tep_get_all_get_params(array('action')) . 'action=buy_now&products_id=' . (int)$new_products['products_id']) . '" data-has-attributes="' . ((tep_has_product_attributes((int)$new_products['products_id']) === true) ? '1' : '0') . '" data-in-stock="' . (int)$new_products['in_stock'] . '" data-product-id="' . (int)$new_products['products_id'] . '" class="btn btn-warning btn-index btn-buy">' . SMALL_IMAGE_BUTTON_PRE_ORDER . '</a>';
+               }
+               elseif ($new_products['in_stock'] < 1) {
+                 echo '<a href="' . tep_href_link('product_info.php', tep_get_all_get_params(array('action')) . 'products_id=' . (int)$new_products['products_id']) . '" class="btn btn-danger btn-index btn-buy" role="button">' . SMALL_IMAGE_BUTTON_NOSTOCK . '</a>';
+               }
+               else {
+                 echo '<a href="' . tep_href_link($PHP_SELF, tep_get_all_get_params(array('action')) . 'action=buy_now&products_id=' . (int)$new_products['products_id']) . '" data-has-attributes="' . ((tep_has_product_attributes((int)$new_products['products_id']) === true) ? '1' : '0') . '" data-in-stock="' . (int)$new_products['in_stock'] . '" data-product-id="' . (int)$new_products['products_id'] . '" class="btn btn-success btn-index btn-buy" role="button">' . MODULE_CONTENT_NEW_PRODUCTS_BUTTON_BUY . '</a>';
+               }                
+            ?>  
             </div>
           </div>
         </div>
